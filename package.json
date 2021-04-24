@@ -1,0 +1,266 @@
+{
+  "name": "coc-htmldjango",
+  "version": "0.0.1",
+  "description": "django templates (htmldjango) extension for coc.nvim. Provides formatter, snippets completion and more...",
+  "author": "yaegassy <yosstools@gmail.com>",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "keywords": [
+    "coc.nvim",
+    "django",
+    "jinja2",
+    "python",
+    "vim",
+    "neovim"
+  ],
+  "engines": {
+    "coc": "^0.0.80"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yaegassy/coc-htmldjango"
+  },
+  "scripts": {
+    "snippets": "yarn snippets:tags && yarn snippets:filters && node cleaning.js",
+    "snippets:tags": "curl -o snippets/tags.json https://raw.githubusercontent.com/vscode-django/vscode-django/main/snippets/templates/tags.json",
+    "snippets:filters": "curl -o snippets/filters.json https://raw.githubusercontent.com/vscode-django/vscode-django/main/snippets/templates/filters.json",
+    "lint": "eslint src --ext ts",
+    "clean": "rimraf lib",
+    "watch": "node esbuild.js --watch",
+    "build": "node esbuild.js",
+    "prepare": "node esbuild.js"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 120,
+    "semi": true
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.0",
+    "@types/node": "^14.6.3",
+    "@typescript-eslint/eslint-plugin": "^4.8.2",
+    "@typescript-eslint/parser": "^4.8.2",
+    "coc.nvim": "^0.0.80",
+    "esbuild": "^0.8.42",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "js-yaml": "^4.1.0",
+    "prettier": "^2.2.0",
+    "rimraf": "^3.0.2",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.2"
+  },
+  "activationEvents": [
+    "onLanguage:htmldjango"
+  ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "coc-htmldjango configuration",
+      "properties": {
+        "htmldjango.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable coc-htmldjango extension"
+        },
+        "htmldjango.unibeautify.brace_style": {
+          "type": "string",
+          "default": "collapse",
+          "enum": [
+            "collapse",
+            "collapse-preserve-inline",
+            "expand",
+            "end-expand",
+            "none"
+          ],
+          "description": "Brace style"
+        },
+        "htmldjango.unibeautify.end_with_newline": {
+          "type": "boolean",
+          "default": true,
+          "description": "End output with newline"
+        },
+        "htmldjango.unibeautify.force_indentation": {
+          "type": "boolean",
+          "default": true,
+          "description": "if indentation should be forcefully applied to markup even if it disruptively adds unintended whitespace to the documents rendered output"
+        },
+        "htmldjango.unibeautify.indent_comments": {
+          "type": "boolean",
+          "default": true,
+          "description": "Determines whether comments should be indented"
+        },
+        "htmldjango.unibeautify.indent_inner_html": {
+          "type": "boolean",
+          "default": true,
+          "description": "Indent and sections"
+        },
+        "htmldjango.unibeautify.indent_scripts": {
+          "type": "string",
+          "default": "normal",
+          "enum": [
+            "keep",
+            "separate",
+            "normal"
+          ],
+          "description": "Indent scripts"
+        },
+        "htmldjango.unibeautify.indent_size": {
+          "type": "integer",
+          "default": 2,
+          "description": "Indentation size/length"
+        },
+        "htmldjango.unibeautify.indent_style": {
+          "type": "string",
+          "default": "space",
+          "enum": [
+            "space",
+            "tab"
+          ],
+          "description": "Indentation style"
+        },
+        "htmldjango.unibeautify.max_preserve_newlines": {
+          "type": "integer",
+          "default": 4,
+          "description": "Number of line-breaks to be preserved in one chunk"
+        },
+        "htmldjango.unibeautify.newline_before_tags": {
+          "type": "array",
+          "default": [],
+          "description": "List of tags which should have an extra newline before them"
+        },
+        "htmldjango.unibeautify.preserve_newlines": {
+          "type": "boolean",
+          "default": true,
+          "description": "Preserve line-breaks"
+        },
+        "htmldjango.unibeautify.quotes": {
+          "type": "string",
+          "default": "none",
+          "enum": [
+            "none",
+            "double",
+            "single"
+          ],
+          "description": "Convert the quote characters delimiting strings from either double or single quotes to the other"
+        },
+        "htmldjango.unibeautify.unformatted": {
+          "type": "array",
+          "default": [
+            "a",
+            "abbr",
+            "area",
+            "audio",
+            "b",
+            "bdi",
+            "bdo",
+            "br",
+            "button",
+            "canvas",
+            "cite",
+            "code",
+            "data",
+            "datalist",
+            "del",
+            "dfn",
+            "em",
+            "embed",
+            "i",
+            "iframe",
+            "img",
+            "input",
+            "ins",
+            "kbd",
+            "keygen",
+            "label",
+            "map",
+            "mark",
+            "math",
+            "meter",
+            "noscript",
+            "object",
+            "output",
+            "progress",
+            "q",
+            "ruby",
+            "s",
+            "samp",
+            "select",
+            "small",
+            "span",
+            "strong",
+            "sub",
+            "sup",
+            "svg",
+            "template",
+            "textarea",
+            "time",
+            "u",
+            "var",
+            "video",
+            "wbr",
+            "text",
+            "acronym",
+            "address",
+            "big",
+            "dt",
+            "strike",
+            "tt",
+            "pre",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
+          ],
+          "description": "List of tags (defaults to inline) that should not be reformatted"
+        },
+        "htmldjango.unibeautify.wrap_attributes": {
+          "type": "string",
+          "default": "auto",
+          "enum": [
+            "auto",
+            "force",
+            "force-aligne"
+          ],
+          "description": "Wrap attributes to new lines"
+        },
+        "htmldjango.unibeautify.wrap_attributes_indent_size": {
+          "type": "integer",
+          "default": 4,
+          "description": "Indent wrapped attributes to after N characters"
+        },
+        "htmldjango.unibeautify.wrap_line_length": {
+          "type": "integer",
+          "default": 120,
+          "description": "Wrap lines at next opportunity after N characters"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "htmldjango.Format",
+        "title": "Format"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "htmldjango",
+        "path": "./snippets/tags.json"
+      },
+      {
+        "language": "htmldjango",
+        "path": "./snippets/filters.json"
+      }
+    ]
+  },
+  "dependencies": {
+    "@unibeautify/beautifier-js-beautify": "^0.4.0",
+    "@unibeautify/beautifier-prettydiff": "^0.6.0",
+    "js-beautify": "^1.10.2",
+    "prettydiff2": "^2.2.8",
+    "unibeautify": "^0.17.0"
+  }
+}
