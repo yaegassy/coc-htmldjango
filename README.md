@@ -2,6 +2,8 @@
 
 django templates (htmldjango) extension for [coc.nvim](https://github.com/neoclide/coc.nvim). Provides "formatter", "snippets completion" and more...
 
+<img width="780" alt="coc-htmldjango-demo" src="https://user-images.githubusercontent.com/188642/115960497-b6542f00-a54c-11eb-9884-63fb58ac7f8c.gif">
+
 ## Features
 
 - Format by [Unibeautify](https://unibeautify.com/) (Beautifiers: JS-Beautify + Pretty Diff)
