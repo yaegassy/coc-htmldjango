@@ -1,6 +1,6 @@
 # coc-htmldjango
 
-django templates (htmldjango) extension for coc.nvim. Provides "formatter", "snippets completion" and more...
+django templates (htmldjango) extension for [coc.nvim](https://github.com/neoclide/coc.nvim). Provides "formatter", "snippets completion" and more...
 
 ## Features
 
