@@ -53,7 +53,7 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 - `htmldjango.unibeautify.preserve_newlines`: Preserve line-breaks, default: `true`
 - `htmldjango.unibeautify.quotes`: Convert the quote characters delimiting strings from either double or single quotes to the other, valid option `"none", "double", "single"`, default: `"none"`
 - `htmldjango.unibeautify.unformatted`: List of tags (defaults to inline) that should not be reformatted, default: `["a", "abbr", "area", "audio", "b", "bdi", "bdo", "br", "button", "canvas", "cite", "code", "data", "datalist", "del", "dfn", "em", "embed", "i", "iframe", "img", "input", "ins", "kbd", "keygen", "label", "map", "mark", "math", "meter", "noscript", "object", "output", "progress", "q", "ruby", "s", "samp", "select", "small", "span", "strong", "sub", "sup", "svg", "template", "textarea", "time", "u", "var", "video", "wbr", "text", "acronym", "address", "big", "dt", "strike", "tt", "pre", "h1", "h2", "h3", "h4", "h5", "h6"]`
-- `htmldjango.unibeautify.wrap_attributes`: Wrap attributes to new lines, valid option `"auto", "force", "force-aligne"`, default: `"auto"`
+- `htmldjango.unibeautify.wrap_attributes`: Wrap attributes to new lines, valid option `"auto", "force", "force-aligned"`, default: `"auto"`
 - `htmldjango.unibeautify.wrap_attributes_indent_size`: Indent wrapped attributes to after N characters, default: `4`
 - `htmldjango.unibeautify.wrap_line_length`: Wrap lines at next opportunity after N characters, default: `120`
 

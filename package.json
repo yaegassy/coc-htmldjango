@@ -223,7 +223,7 @@
           "enum": [
             "auto",
             "force",
-            "force-aligne"
+            "force-aligned"
           ],
           "description": "Wrap attributes to new lines"
         },
