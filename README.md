@@ -69,14 +69,13 @@ For the Unibeautify configuration file, use the configuration for the HTML langu
 
 If there is no configuration file, the default value of `coc-htmldjango` will be setting.
 
-## TODO
-
-- Add linter feature, I might add [curlylint](https://www.curlylint.org/)
-  - Otherwise, if there is a linter that is best suited for django templates... :(
-
 ## Known bugs in Unibeautify (prettydiff)
 
 - Files containing `"{% comment %}"` will failed to format
+
+## Related coc.nvim extension
+
+- [yaegassy/coc-curlylint](https://github.com/yaegassy/coc-curlylint)
 
 ## Inspiration
 
