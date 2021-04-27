@@ -64,6 +64,15 @@
           "default": true,
           "description": "Enable coc-htmldjango extension"
         },
+        "htmldjango.hoverLang": {
+          "type": "string",
+          "default": "django",
+          "enum": [
+            "django",
+            "jinja2"
+          ],
+          "description": "Set the template language to be used for the hover"
+        },
         "htmldjango.unibeautify.brace_style": {
           "type": "string",
           "default": "collapse",

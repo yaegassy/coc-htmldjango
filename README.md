@@ -7,6 +7,7 @@ django templates (htmldjango) extension for [coc.nvim](https://github.com/neocli
 ## Features
 
 - Format by [Unibeautify](https://unibeautify.com/) (Beautifiers: JS-Beautify + Pretty Diff)
+- Hover
 - Snippets completion
   - To use it, you need to install [coc-snippets](https://github.com/neoclide/coc-snippets).
   - And set `snippets.loadFromExtensions` to true in "coc-settings.json"

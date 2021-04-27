@@ -2,6 +2,8 @@ import { commands, Disposable, DocumentSelector, ExtensionContext, languages, Te
 
 import HtmlDjangoFormattingEditProvider, { doFormat, fullDocumentRange } from './format';
 
+import { HtmlDjangoHoverProvider } from './hover';
+
 interface Selectors {
   rangeLanguageSelector: DocumentSelector;
   languageSelector: DocumentSelector;
@@ -70,4 +72,6 @@ export async function activate(context: ExtensionContext): Promise<void> {
       }
     })
   );
+
+  context.subscriptions.push(languages.registerHoverProvider(['htmldjango'], new HtmlDjangoHoverProvider(context)));
 }
