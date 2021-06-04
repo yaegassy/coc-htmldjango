@@ -8,7 +8,7 @@ django templates (htmldjango) extension for [coc.nvim](https://github.com/neocli
 
 - Format (One of them can be selected in the `htmldjango.formatting.provider` settings)
   - by [Unibeautify](https://unibeautify.com/) (Beautifiers: JS-Beautify + Pretty Diff) [Node tool]
-  - by [DjHTML](https://github.com/rtts/djhtml) ("Django/Jinja" template indenter) [Python tool]
+  - by [DjHTML](https://github.com/rtts/djhtml) ("Django/Jinja" template indenter) [Python tool] | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/2)
 - Hover | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/1)
 - Snippets completion
   - To use it, you need to install [coc-snippets](https://github.com/neoclide/coc-snippets).
