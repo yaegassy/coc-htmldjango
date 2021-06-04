@@ -20,7 +20,6 @@ export class HtmlDjangoHoverProvider implements HoverProvider {
     const doc = workspace.getDocument(document.uri);
     if (!doc) return null;
 
-    //const wordRange = doc.getWordRangeAtPosition(position, '@');
     const wordRange = doc.getWordRangeAtPosition(position);
     if (!wordRange) return null;
 
