@@ -17,6 +17,7 @@ import HtmlDjangoFormattingEditProvider, { fullDocumentRange } from './format';
 import { HtmlDjangoHoverProvider } from './hover';
 import { djhtmlInstall } from './installer';
 import { resolveDjhtmlPath } from './tool';
+import { HtmlDjangoCodeActionProvider } from './action';
 
 interface Selectors {
   rangeLanguageSelector: DocumentSelector;
@@ -128,6 +129,10 @@ export async function activate(context: ExtensionContext): Promise<void> {
   );
 
   context.subscriptions.push(languages.registerHoverProvider(['htmldjango'], new HtmlDjangoHoverProvider(context)));
+
+  const languageSelector: DocumentSelector = [{ language: 'htmldjango', scheme: 'file' }];
+  const codeActionProvider = new HtmlDjangoCodeActionProvider();
+  context.subscriptions.push(languages.registerCodeActionProvider(languageSelector, codeActionProvider, 'htmldjango'));
 }
 
 async function installWrapper(pythonCommand: string, context: ExtensionContext) {
