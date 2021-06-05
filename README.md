@@ -10,7 +10,7 @@ django templates (htmldjango) extension for [coc.nvim](https://github.com/neocli
   - by [Unibeautify](https://unibeautify.com/) (Beautifiers: JS-Beautify + Pretty Diff) [Node tool]
   - by [DjHTML](https://github.com/rtts/djhtml) ("Django/Jinja" template indenter) [Python tool] | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/2)
 - Hover | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/1)
-- CodeAction
+- CodeAction | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/3)
 - Snippets completion
   - To use it, you need to install [coc-snippets](https://github.com/neoclide/coc-snippets).
   - And set `snippets.loadFromExtensions` to true in "coc-settings.json"
