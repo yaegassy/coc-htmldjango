@@ -20,11 +20,11 @@ It is possible to use `coc-htmldjango` with filetype other than `htmldjango`.
 
 Set `g:coc_filetype_map` in ".vimrc" or "init.vim".
 
-**e.g. jinja2**:
+**e.g. jinja html**:
 
 ```vim
 let g:coc_filetype_map = {
-  \ 'jinja2': 'htmldjango',
+  \ 'jinja.html': 'htmldjango',
   \ }
 ```
 
