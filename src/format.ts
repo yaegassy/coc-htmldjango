@@ -45,10 +45,7 @@ class HtmlDjangoFormattingEditProvider implements DocumentFormattingEditProvider
   public getFormatFunc(formatter?: string): FormatFuncType {
     let formatterFunc: FormatFuncType;
 
-    // **MEMO**:
-    // Default: unibeautify
-    // Plan to change to djhtml in the future.
-    formatterFunc = doUnibeautifyFormat;
+    formatterFunc = doDjhtmlFormat;
 
     if (formatter) {
       if (formatter === 'unibeautify') {
@@ -58,7 +55,7 @@ class HtmlDjangoFormattingEditProvider implements DocumentFormattingEditProvider
       }
     } else {
       const extensionConfig = workspace.getConfiguration('htmldjango');
-      const formattingProvider = extensionConfig.get<string>('formatting.provider', 'unibeautify');
+      const formattingProvider = extensionConfig.get<string>('formatting.provider', 'djhtml');
 
       if (formattingProvider === 'unibeautify') {
         formatterFunc = doUnibeautifyFormat;

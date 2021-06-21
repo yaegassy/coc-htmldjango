@@ -86,11 +86,11 @@
         },
         "htmldjango.formatting.provider": {
           "type": "string",
-          "default": "unibeautify",
+          "default": "djhtml",
           "description": "Provider for formatting. Possible options include 'djhtml' and 'unibeautify'",
           "enum": [
-            "unibeautify",
             "djhtml",
+            "unibeautify",
             "none"
           ]
         },
