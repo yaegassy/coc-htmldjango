@@ -7,7 +7,7 @@ django templates (htmldjango) extension for [coc.nvim](https://github.com/neocli
 ## Features
 
 - Format
-  - by [DjHTML](https://github.com/rtts/djhtml) ("Django/Jinja" template indenter) [Python tool] | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/2)
+  - by [DjHTML](https://github.com/rtts/djhtml) ("Django/Jinja" template indenter) | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/2)
 - Hover | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/1)
 - CodeAction | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/3)
 - Snippets completion
