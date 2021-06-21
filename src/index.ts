@@ -70,10 +70,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
     })
   );
 
-  // **TODO**:
-  // Default: unibeautify
-  // Plan to change to djhtml in the future.
-  const formattingProvider = extensionConfig.get<string>('formatting.provider', 'unibeautify');
+  const formattingProvider = extensionConfig.get<string>('formatting.provider', 'djhtml');
 
   let djhtmlPath = extensionConfig.get('djhtml.commandPath', '');
   djhtmlPath = resolveDjhtmlPath(context, djhtmlPath);
