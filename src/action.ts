@@ -27,7 +27,7 @@ export class HtmlDjangoCodeActionProvider implements CodeActionProvider {
     const codeActions: CodeAction[] = [];
 
     /** Add {# fmt:off #} for this line (htmldjango) */
-    if (range.start.line === range.end.line && range.start.character === 0) {
+    if (this.lineRange(range)) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const line = doc.getline(range.start.line);
 
@@ -53,7 +53,7 @@ export class HtmlDjangoCodeActionProvider implements CodeActionProvider {
     }
 
     /** Add {# fmt:on #} for this line (htmldjango) */
-    if (range.start.line === range.end.line && range.start.character === 0) {
+    if (this.lineRange(range)) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const line = doc.getline(range.start.line);
 
@@ -79,5 +79,12 @@ export class HtmlDjangoCodeActionProvider implements CodeActionProvider {
     }
 
     return codeActions;
+  }
+
+  private lineRange(r: Range): boolean {
+    return (
+      (r.start.line + 1 === r.end.line && r.start.character === 0 && r.end.character === 0) ||
+      (r.start.line === r.end.line && r.start.character === 0)
+    );
   }
 }
