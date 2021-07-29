@@ -55,6 +55,14 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 
 ## Code Actions
 
+**Example key mapping (Code Action related)**:
+
+```vim
+nmap <silent> ga <Plug>(coc-codeaction-line)
+```
+
+**Actions**:
+
 - `Add {# fmt:off #} for this line`
 - `Add {# fmt:on #} for this line`
 
