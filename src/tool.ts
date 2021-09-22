@@ -35,6 +35,28 @@ export function resolveDjhtmlPath(context: ExtensionContext, toolPath: string): 
   return toolPath;
 }
 
+export function resolveDjlintPath(context: ExtensionContext, toolPath: string): string {
+  if (!toolPath) {
+    const whichDjlint = whichCmd('djlint');
+    if (whichDjlint) {
+      toolPath = whichDjlint;
+    } else if (
+      fs.existsSync(path.join(context.storagePath, 'htmldjango', 'venv', 'Scripts', 'djlint.exe')) ||
+      fs.existsSync(path.join(context.storagePath, 'htmldjango', 'venv', 'bin', 'djlint'))
+    ) {
+      if (process.platform === 'win32') {
+        toolPath = path.join(context.storagePath, 'htmldjango', 'venv', 'Scripts', 'djlint.exe');
+      } else {
+        toolPath = path.join(context.storagePath, 'htmldjango', 'venv', 'bin', 'djlint');
+      }
+    } else {
+      toolPath = '';
+    }
+  }
+
+  return toolPath;
+}
+
 export function getPythonPath(config: WorkspaceConfiguration, isRealpath?: boolean): string {
   let pythonPath = config.get<string>('builtin.pythonPath', '');
   if (pythonPath) {

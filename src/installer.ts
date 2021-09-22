@@ -6,7 +6,7 @@ import rimraf from 'rimraf';
 import child_process from 'child_process';
 import util from 'util';
 
-import { DJHTML_VERSION } from './constant';
+import { DJHTML_VERSION, DJLINT_VERSION } from './constant';
 
 const exec = util.promisify(child_process.exec);
 
@@ -23,7 +23,8 @@ export async function installTools(pythonCommand: string, context: ExtensionCont
   statusItem.show();
 
   const installCmd =
-    `${pythonCommand} -m venv ${pathVenv} && ` + `${pathVenvPython} -m pip install -U pip djhtml==${DJHTML_VERSION}`;
+    `${pythonCommand} -m venv ${pathVenv} && ` +
+    `${pathVenvPython} -m pip install -U pip djhtml==${DJHTML_VERSION} djlint==${DJLINT_VERSION}`;
 
   rimraf.sync(pathVenv);
   try {

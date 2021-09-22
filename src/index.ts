@@ -14,8 +14,9 @@ import fs from 'fs';
 import HtmlDjangoFormattingEditProvider, { fullDocumentRange } from './format';
 import { HtmlDjangoHoverProvider } from './hover';
 import { installTools } from './installer';
-import { resolveDjhtmlPath, getPythonPath } from './tool';
+import { resolveDjhtmlPath, resolveDjlintPath, getPythonPath } from './tool';
 import { HtmlDjangoCodeActionProvider } from './action';
+import { LintEngine } from './lint';
 
 interface Selectors {
   rangeLanguageSelector: DocumentSelector;
@@ -47,17 +48,17 @@ function selectors(): Selectors {
 }
 
 export async function activate(context: ExtensionContext): Promise<void> {
-  const { subscriptions } = context;
   const extensionConfig = workspace.getConfiguration('htmldjango');
   const isEnable = extensionConfig.get<boolean>('enable', true);
   if (!isEnable) return;
+
+  const { subscriptions } = context;
+  const outputChannel = window.createOutputChannel('htmldjango');
 
   const extensionStoragePath = context.storagePath;
   if (!fs.existsSync(extensionStoragePath)) {
     fs.mkdirSync(extensionStoragePath);
   }
-
-  const outputChannel = window.createOutputChannel('htmldjango');
 
   const isRealpath = true;
   const pythonCommand = getPythonPath(extensionConfig, isRealpath);
@@ -68,23 +69,34 @@ export async function activate(context: ExtensionContext): Promise<void> {
     })
   );
 
-  const formattingProvider = extensionConfig.get<string>('formatting.provider', 'djhtml');
-
   let djhtmlPath = extensionConfig.get('djhtml.commandPath', '');
   djhtmlPath = resolveDjhtmlPath(context, djhtmlPath);
+  let djlintPath = extensionConfig.get('djlint.commandPath', '');
+  djlintPath = resolveDjlintPath(context, djlintPath);
+  const djlintEnableLint = extensionConfig.get<boolean>('djlint.enableLint');
 
-  if (formattingProvider === 'djhtml') {
+  const formattingProvider = extensionConfig.get<string>('formatting.provider', 'djhtml');
+
+  if (formattingProvider === 'djhtml' || formattingProvider === 'djlint' || djlintEnableLint) {
     if (!djhtmlPath) {
       if (pythonCommand) {
         await installWrapper(pythonCommand, context);
       }
+    } else if (!djlintPath) {
+      if (pythonCommand) {
+        await installWrapper(pythonCommand, context);
+      }
     }
+
+    // After the installation is complete, resolve again
+    djhtmlPath = resolveDjhtmlPath(context, djhtmlPath);
+    djlintPath = resolveDjlintPath(context, djlintPath);
   }
 
   const editProvider = new HtmlDjangoFormattingEditProvider(context, outputChannel);
   const priority = 1;
 
-  if (formattingProvider === 'unibeautify' || formattingProvider === 'djhtml') {
+  if (formattingProvider === 'unibeautify' || formattingProvider === 'djhtml' || formattingProvider === 'djlint') {
     function registerFormatter(): void {
       disposeHandlers();
       const { languageSelector, rangeLanguageSelector } = selectors();
@@ -123,15 +135,67 @@ export async function activate(context: ExtensionContext): Promise<void> {
     })
   );
 
+  subscriptions.push(
+    commands.registerCommand('htmldjango.djlint.format', async () => {
+      const doc = await workspace.document;
+      const doFormat = editProvider.getFormatFunc('djlint');
+      const code = await doFormat(context, outputChannel, doc.textDocument, undefined);
+      const edits = [TextEdit.replace(fullDocumentRange(doc.textDocument), code)];
+      if (edits) {
+        await doc.applyEdits(edits);
+      }
+    })
+  );
+
   context.subscriptions.push(languages.registerHoverProvider(['htmldjango'], new HtmlDjangoHoverProvider(context)));
 
   const languageSelector: DocumentSelector = [{ language: 'htmldjango', scheme: 'file' }];
   const codeActionProvider = new HtmlDjangoCodeActionProvider();
   context.subscriptions.push(languages.registerCodeActionProvider(languageSelector, codeActionProvider, 'htmldjango'));
+
+  const engine = new LintEngine(djlintPath, outputChannel);
+  if (djlintPath && djlintEnableLint) {
+    const onOpen = extensionConfig.get<boolean>('djlint.lintOnOpen');
+    if (onOpen) {
+      workspace.documents.map(async (doc) => {
+        await engine.lint(doc.textDocument);
+      });
+
+      workspace.onDidOpenTextDocument(
+        async (e) => {
+          await engine.lint(e);
+        },
+        null,
+        subscriptions
+      );
+    }
+    const onChange = extensionConfig.get<boolean>('djlint.lintOnChange');
+    if (onChange) {
+      workspace.onDidChangeTextDocument(
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        async (_e) => {
+          const doc = await workspace.document;
+          await engine.lint(doc.textDocument);
+        },
+        null,
+        subscriptions
+      );
+    }
+    const onSave = extensionConfig.get<boolean>('djlint.lintOnSave');
+    if (onSave) {
+      workspace.onDidSaveTextDocument(
+        async (e) => {
+          await engine.lint(e);
+        },
+        null,
+        subscriptions
+      );
+    }
+  }
 }
 
 async function installWrapper(pythonCommand: string, context: ExtensionContext) {
-  const msg = 'Install/Upgrade "djhtml"?';
+  const msg = 'Install/Upgrade htmldjango related tools?';
   context.workspaceState;
 
   let ret = 0;
