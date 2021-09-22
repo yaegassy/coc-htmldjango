@@ -7,16 +7,14 @@ import {
   TextEdit,
   window,
   workspace,
-  WorkspaceConfiguration,
 } from 'coc.nvim';
 
 import fs from 'fs';
-import which from 'which';
 
 import HtmlDjangoFormattingEditProvider, { fullDocumentRange } from './format';
 import { HtmlDjangoHoverProvider } from './hover';
 import { djhtmlInstall } from './installer';
-import { resolveDjhtmlPath } from './tool';
+import { resolveDjhtmlPath, getPythonPath } from './tool';
 import { HtmlDjangoCodeActionProvider } from './action';
 
 interface Selectors {
@@ -147,33 +145,4 @@ async function installWrapper(pythonCommand: string, context: ExtensionContext) 
   } else {
     return;
   }
-}
-
-function getPythonPath(config: WorkspaceConfiguration, isRealpath?: boolean): string {
-  let pythonPath = config.get<string>('builtin.pythonPath', '');
-  if (pythonPath) {
-    return pythonPath;
-  }
-
-  try {
-    pythonPath = which.sync('python3');
-    if (isRealpath) {
-      pythonPath = fs.realpathSync(pythonPath);
-    }
-    return pythonPath;
-  } catch (e) {
-    // noop
-  }
-
-  try {
-    pythonPath = which.sync('python');
-    if (isRealpath) {
-      pythonPath = fs.realpathSync(pythonPath);
-    }
-    return pythonPath;
-  } catch (e) {
-    // noop
-  }
-
-  return pythonPath;
 }

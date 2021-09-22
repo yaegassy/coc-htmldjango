@@ -1,4 +1,4 @@
-import { ExtensionContext } from 'coc.nvim';
+import { ExtensionContext, WorkspaceConfiguration } from 'coc.nvim';
 
 import fs from 'fs';
 import path from 'path';
@@ -33,4 +33,33 @@ export function resolveDjhtmlPath(context: ExtensionContext, toolPath: string): 
   }
 
   return toolPath;
+}
+
+export function getPythonPath(config: WorkspaceConfiguration, isRealpath?: boolean): string {
+  let pythonPath = config.get<string>('builtin.pythonPath', '');
+  if (pythonPath) {
+    return pythonPath;
+  }
+
+  try {
+    pythonPath = which.sync('python3');
+    if (isRealpath) {
+      pythonPath = fs.realpathSync(pythonPath);
+    }
+    return pythonPath;
+  } catch (e) {
+    // noop
+  }
+
+  try {
+    pythonPath = which.sync('python');
+    if (isRealpath) {
+      pythonPath = fs.realpathSync(pythonPath);
+    }
+    return pythonPath;
+  } catch (e) {
+    // noop
+  }
+
+  return pythonPath;
 }
