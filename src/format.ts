@@ -10,7 +10,6 @@ import {
 
 import { doDjhtmlFormat } from './formatter/djhtml';
 import { doDjlintFormat } from './formatter/djlint';
-import { doUnibeautifyFormat } from './formatter/unibeautify';
 
 export type FormatFuncType = (
   context: ExtensionContext,
@@ -49,9 +48,7 @@ class HtmlDjangoFormattingEditProvider implements DocumentFormattingEditProvider
     formatterFunc = doDjhtmlFormat;
 
     if (formatter) {
-      if (formatter === 'unibeautify') {
-        formatterFunc = doUnibeautifyFormat;
-      } else if (formatter === 'djhtml') {
+      if (formatter === 'djhtml') {
         formatterFunc = doDjhtmlFormat;
       } else if (formatter === 'djlint') {
         formatterFunc = doDjlintFormat;
@@ -60,9 +57,7 @@ class HtmlDjangoFormattingEditProvider implements DocumentFormattingEditProvider
       const extensionConfig = workspace.getConfiguration('htmldjango');
       const formattingProvider = extensionConfig.get<string>('formatting.provider', 'djhtml');
 
-      if (formattingProvider === 'unibeautify') {
-        formatterFunc = doUnibeautifyFormat;
-      } else if (formattingProvider === 'djhtml') {
+      if (formattingProvider === 'djhtml') {
         formatterFunc = doDjhtmlFormat;
       } else if (formattingProvider === 'djlint') {
         formatterFunc = doDjlintFormat;
