@@ -9,6 +9,7 @@ import {
 } from 'coc.nvim';
 
 import { doDjhtmlFormat } from './formatter/djhtml';
+import { doDjlintFormat } from './formatter/djlint';
 import { doUnibeautifyFormat } from './formatter/unibeautify';
 
 export type FormatFuncType = (
@@ -52,6 +53,8 @@ class HtmlDjangoFormattingEditProvider implements DocumentFormattingEditProvider
         formatterFunc = doUnibeautifyFormat;
       } else if (formatter === 'djhtml') {
         formatterFunc = doDjhtmlFormat;
+      } else if (formatter === 'djlint') {
+        formatterFunc = doDjlintFormat;
       }
     } else {
       const extensionConfig = workspace.getConfiguration('htmldjango');
@@ -61,6 +64,8 @@ class HtmlDjangoFormattingEditProvider implements DocumentFormattingEditProvider
         formatterFunc = doUnibeautifyFormat;
       } else if (formattingProvider === 'djhtml') {
         formatterFunc = doDjhtmlFormat;
+      } else if (formattingProvider === 'djlint') {
+        formatterFunc = doDjlintFormat;
       }
     }
 

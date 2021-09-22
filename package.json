@@ -1,6 +1,7 @@
 {
   "name": "coc-htmldjango",
   "version": "0.5.2",
+  "djlintVersion": "0.4.0",
   "djhtmlVersion": "1.4.9",
   "description": "django templates (htmldjango) extension for coc.nvim. Provides formatter, snippets completion and more...",
   "author": "yaegassy <yosstools@gmail.com>",
@@ -61,6 +62,14 @@
     "onLanguage:htmldjango"
   ],
   "contributes": {
+    "rootPatterns": [
+      {
+        "filetype": "htmldjango",
+        "patterns": [
+          "pyproject.toml"
+        ]
+      }
+    ],
     "configuration": {
       "type": "object",
       "title": "coc-htmldjango configuration",
@@ -87,9 +96,10 @@
         "htmldjango.formatting.provider": {
           "type": "string",
           "default": "djhtml",
-          "description": "Provider for formatting. Possible options include 'djhtml' and 'unibeautify'",
+          "description": "Provider for formatting. Possible options include 'djhtml' and 'djlint'",
           "enum": [
             "djhtml",
+            "djlint",
             "unibeautify",
             "none"
           ]
@@ -103,6 +113,31 @@
           "type": "number",
           "default": 4,
           "description": "Set tabwidth (--tabwidth)"
+        },
+        "htmldjango.djlint.commandPath": {
+          "type": "string",
+          "default": "",
+          "description": "The custom path to the djlint (Absolute path)."
+        },
+        "htmldjango.djlint.enableLint": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable djLint lint (diagnostics)"
+        },
+        "htmldjango.djlint.lintOnOpen": {
+          "type": "boolean",
+          "default": true,
+          "description": "Lint file on opening"
+        },
+        "htmldjango.djlint.lintOnChange": {
+          "type": "boolean",
+          "default": true,
+          "description": "Lint file on change"
+        },
+        "htmldjango.djlint.lintOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Lint file on save"
         },
         "htmldjango.unibeautify.brace_style": {
           "type": "string",
@@ -291,6 +326,10 @@
       {
         "command": "htmldjango.djhtml.format",
         "title": "DjHTML format"
+      },
+      {
+        "command": "htmldjango.djlint.format",
+        "title": "djLint format"
       }
     ],
     "snippets": [

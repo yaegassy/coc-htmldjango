@@ -8,24 +8,15 @@ django templates (htmldjango) extension for [coc.nvim](https://github.com/neocli
 
 - Format
   - by [DjHTML](https://github.com/rtts/djhtml) ("Django/Jinja" template indenter) | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/2)
+  - [Experimental] by [djLint](https://github.com/Riverside-Healthcare/djlint) (reformat HTML templates)
+- [Experimental] Lint (default: `false`)
+  - by [djLint](https://github.com/Riverside-Healthcare/djlint) (Find common formatting issues)
 - Hover | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/1)
 - CodeAction | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/3)
 - Snippets completion
   - To use it, you need to install [coc-snippets](https://github.com/neoclide/coc-snippets).
   - And set `snippets.loadFromExtensions` to true in "coc-settings.json"
-- Built-in installer (DjHTML)
-
-It is possible to use `coc-htmldjango` with filetype other than `htmldjango`.
-
-Set `g:coc_filetype_map` in ".vimrc" or "init.vim".
-
-**e.g. jinja html**:
-
-```vim
-let g:coc_filetype_map = {
-  \ 'jinja.html': 'htmldjango',
-  \ }
-```
+- Built-in installer (DjHTML, djLint)
 
 ## Install
 
@@ -41,17 +32,29 @@ let g:coc_filetype_map = {
 Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 ```
 
+**Recommended coc extension**:
+
+- [coc-html](https://github.com/neoclide/coc-html)
+- [coc-snippets](https://github.com/neoclide/coc-snippets).
+
 ## Configuration options for coc-htmldjango
 
 - `htmldjango.enable`: Enable coc-htmldjango extension, default: `true`
 - `htmldjango.builtin.pythonPath`: Python 3.x path (Absolute path) to be used for built-in install, default: `""`
+- `htmldjango.formatting.provider`: Provider for formatting. Possible options include 'djhtml', 'djlint', and 'none', default: `"djhtml"`
 - `htmldjango.djhtml.commandPath`: The custom path to the djhtml (Absolute path), default: `""`
 - `htmldjango.djhtml.tabWidth`: Set tabwidth (--tabwidth), default: `4`
+- `htmldjango.djlint.commandPath`: The custom path to the djlint (Absolute path), default: `""`
+- `htmldjango.djlint.enable`: Enable djLint (diagnostics), default: `false`
+- `htmldjango.djlint.lintOnOpen`: Lint file on opening, default: `true`
+- `htmldjango.djlint.lintOnChange`: Lint file on change, default: `true`
+- `htmldjango.djlint.lintOnSave`: Lint file on save, default: `true`
 
 ## Commands
 
 - `htmldjango.builtin.installTools`
 - `htmldjango.djhtml.format`
+- `htmldjango.djlint.format`
 
 ## Code Actions
 
@@ -78,6 +81,7 @@ coc-htmldjango allows you to create an extension-only "venv" and install "djhtml
 
 - [vscode-django/vscode-django](https://github.com/vscode-django/vscode-django)
 - [rtts/djhtml](https://github.com/rtts/djhtml)
+- [Riverside-Healthcare/djlint](https://github.com/Riverside-Healthcare/djlint)
 - [Unibeautify/unibeautify](https://github.com/Unibeautify/unibeautify)
 - [neoclide/coc-snippets](https://github.com/neoclide/coc-snippets)
 - [neoclide/coc-html](https://github.com/neoclide/coc-html)
