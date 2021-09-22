@@ -96,7 +96,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
   const editProvider = new HtmlDjangoFormattingEditProvider(context, outputChannel);
   const priority = 1;
 
-  if (formattingProvider === 'unibeautify' || formattingProvider === 'djhtml' || formattingProvider === 'djlint') {
+  if (formattingProvider === 'djhtml' || formattingProvider === 'djlint') {
     function registerFormatter(): void {
       disposeHandlers();
       const { languageSelector, rangeLanguageSelector } = selectors();
@@ -110,18 +110,6 @@ export async function activate(context: ExtensionContext): Promise<void> {
     }
     registerFormatter();
   }
-
-  subscriptions.push(
-    commands.registerCommand('htmldjango.unibeautify.format', async () => {
-      const doc = await workspace.document;
-      const doFormat = editProvider.getFormatFunc('unibeautify');
-      const code = await doFormat(context, outputChannel, doc.textDocument, undefined);
-      const edits = [TextEdit.replace(fullDocumentRange(doc.textDocument), code)];
-      if (edits) {
-        await doc.applyEdits(edits);
-      }
-    })
-  );
 
   subscriptions.push(
     commands.registerCommand('htmldjango.djhtml.format', async () => {
