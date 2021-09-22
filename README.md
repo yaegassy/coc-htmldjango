@@ -50,8 +50,8 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 
 ## Commands
 
+- `htmldjango.builtin.installTools`
 - `htmldjango.djhtml.format`
-- `htmldjango.djhtml.install`
 
 ## Code Actions
 
@@ -66,12 +66,12 @@ nmap <silent> ga <Plug>(coc-codeaction-line)
 - `Add {# fmt:off #} for this line`
 - `Add {# fmt:on #} for this line`
 
-## Bult-in install (DjHTML)
+## Bult-in install (DjHTML, djLint)
 
-coc-htmldjango allows you to create an extension-only "venv" and install "djhtml".
+coc-htmldjango allows you to create an extension-only "venv" and install "djhtml" and "djlint".
 
 ```vim
-:CocComannd htmldjango.djhtml.install
+:CocComannd htmldjango.builtin.installTools
 ```
 
 ## Thanks

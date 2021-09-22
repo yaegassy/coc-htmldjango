@@ -281,16 +281,16 @@
     },
     "commands": [
       {
+        "command": "htmldjango.builtin.installTools",
+        "title": "Install htmldjango related tools"
+      },
+      {
         "command": "htmldjango.unibeautify.format",
         "title": "Unibeautify format"
       },
       {
         "command": "htmldjango.djhtml.format",
         "title": "DjHTML format"
-      },
-      {
-        "command": "htmldjango.djhtml.install",
-        "title": "Install djhtml"
       }
     ],
     "snippets": [

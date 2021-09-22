@@ -63,7 +63,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
   const pythonCommand = getPythonPath(extensionConfig, isRealpath);
 
   subscriptions.push(
-    commands.registerCommand('htmldjango.djhtml.install', async () => {
+    commands.registerCommand('htmldjango.builtin.installTools', async () => {
       await installWrapper(pythonCommand, context);
     })
   );
