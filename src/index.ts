@@ -13,7 +13,7 @@ import fs from 'fs';
 
 import HtmlDjangoFormattingEditProvider, { fullDocumentRange } from './format';
 import { HtmlDjangoHoverProvider } from './hover';
-import { djhtmlInstall } from './installer';
+import { installTools } from './installer';
 import { resolveDjhtmlPath, getPythonPath } from './tool';
 import { HtmlDjangoCodeActionProvider } from './action';
 
@@ -138,7 +138,7 @@ async function installWrapper(pythonCommand: string, context: ExtensionContext) 
   ret = await window.showQuickpick(['Yes', 'Cancel'], msg);
   if (ret === 0) {
     try {
-      await djhtmlInstall(pythonCommand, context);
+      await installTools(pythonCommand, context);
     } catch (e) {
       return;
     }

@@ -19,13 +19,13 @@ export function resolveDjhtmlPath(context: ExtensionContext, toolPath: string): 
     if (whichDjhtml) {
       toolPath = whichDjhtml;
     } else if (
-      fs.existsSync(path.join(context.storagePath, 'djhtml', 'venv', 'Scripts', 'djhtml.exe')) ||
-      fs.existsSync(path.join(context.storagePath, 'djhtml', 'venv', 'bin', 'djhtml'))
+      fs.existsSync(path.join(context.storagePath, 'htmldjango', 'venv', 'Scripts', 'djhtml.exe')) ||
+      fs.existsSync(path.join(context.storagePath, 'htmldjango', 'venv', 'bin', 'djhtml'))
     ) {
       if (process.platform === 'win32') {
-        toolPath = path.join(context.storagePath, 'djhtml', 'venv', 'Scripts', 'djhtml.exe');
+        toolPath = path.join(context.storagePath, 'htmldjango', 'venv', 'Scripts', 'djhtml.exe');
       } else {
-        toolPath = path.join(context.storagePath, 'djhtml', 'venv', 'bin', 'djhtml');
+        toolPath = path.join(context.storagePath, 'htmldjango', 'venv', 'bin', 'djhtml');
       }
     } else {
       toolPath = '';
