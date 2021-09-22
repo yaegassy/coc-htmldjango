@@ -10,7 +10,7 @@ django templates (htmldjango) extension for [coc.nvim](https://github.com/neocli
   - by [DjHTML](https://github.com/rtts/djhtml) ("Django/Jinja" template indenter) | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/2)
   - [Experimental] by [djLint](https://github.com/Riverside-Healthcare/djlint) (reformat HTML templates)
 - [Experimental] Lint (default: `false`)
-  - by [djLint](https://github.com/Riverside-Healthcare/djlint) (Find common formatting issues)
+  - by [djLint](https://github.com/Riverside-Healthcare/djlint) (Find common formatting issues) | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/6)
 - Hover | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/1)
 - CodeAction | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/3)
 - Snippets completion
@@ -35,7 +35,7 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 **Recommended coc extension**:
 
 - [coc-html](https://github.com/neoclide/coc-html)
-- [coc-snippets](https://github.com/neoclide/coc-snippets).
+- [coc-snippets](https://github.com/neoclide/coc-snippets)
 
 ## Configuration options for coc-htmldjango
 
@@ -82,9 +82,6 @@ coc-htmldjango allows you to create an extension-only "venv" and install "djhtml
 - [vscode-django/vscode-django](https://github.com/vscode-django/vscode-django)
 - [rtts/djhtml](https://github.com/rtts/djhtml)
 - [Riverside-Healthcare/djlint](https://github.com/Riverside-Healthcare/djlint)
-- [Unibeautify/unibeautify](https://github.com/Unibeautify/unibeautify)
-- [neoclide/coc-snippets](https://github.com/neoclide/coc-snippets)
-- [neoclide/coc-html](https://github.com/neoclide/coc-html)
 
 ## License
 
