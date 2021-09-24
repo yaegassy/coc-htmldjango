@@ -49,6 +49,7 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 - `htmldjango.djlint.lintOnOpen`: Lint file on opening, default: `true`
 - `htmldjango.djlint.lintOnChange`: Lint file on change, default: `true`
 - `htmldjango.djlint.lintOnSave`: Lint file on save, default: `true`
+- `htmldjango.djlint.ignore`: Codes to ignore (`--ignore`), ex: "W013,W014", default: `""`
 
 ## Commands
 

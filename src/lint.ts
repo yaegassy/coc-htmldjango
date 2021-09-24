@@ -42,6 +42,14 @@ export class LintEngine {
     const args: string[] = [];
     const cwd = Uri.file(workspace.root).fsPath;
     const opts = { cwd, shell: true };
+
+    const extensionConfig = workspace.getConfiguration('htmldjango');
+    const ignoreRules = extensionConfig.get<string>('djlint.ignore', '');
+
+    if (ignoreRules) {
+      args.push('--ignore', ignoreRules);
+    }
+
     args.push('-');
 
     this.outputChannel.appendLine(`${'#'.repeat(10)} djlint (lint)\n`);
@@ -56,6 +64,7 @@ export class LintEngine {
       const cps = cp.spawn(self.cmdPath, args, opts);
       cps.stdin.write(textDocument.getText());
       cps.stdin.end();
+      let stderrOutput = '';
 
       let buffer = '';
       const onDataEvent = (data: Buffer) => {
@@ -109,17 +118,18 @@ export class LintEngine {
         resolve();
       };
 
-      // If there is an stderr
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       cps.stderr.on('data', (error) => {
-        // MEMO: debug
-        //self.outputChannel.appendLine(`\n==== STDERR ====\n`);
-        //self.outputChannel.appendLine(`${stripAnsi(String(error))}`);
-        //self.outputChannel.appendLine(`\n==== /STDERR ====\n`);
+        stderrOutput = String(error);
       });
-
       cps.stdout.on('data', onDataEvent);
       cps.stdout.on('end', onEndEvent);
+
+      cps.on('close', (code) => {
+        if (code && code >= 2) {
+          self.outputChannel.appendLine(`\n==== STDERR (CODE: ${String(code)}) ====\n`);
+          self.outputChannel.appendLine(`${stderrOutput}`);
+        }
+      });
 
       resolve();
     });

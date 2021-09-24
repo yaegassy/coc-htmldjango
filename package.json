@@ -135,6 +135,11 @@
           "type": "boolean",
           "default": true,
           "description": "Lint file on save"
+        },
+        "htmldjango.djlint.ignore": {
+          "type": "string",
+          "default": "",
+          "description": "Codes to ignore (--ignore)"
         }
       }
     },
