@@ -8,8 +8,8 @@ django templates (htmldjango) extension for [coc.nvim](https://github.com/neocli
 
 - Format
   - by [DjHTML](https://github.com/rtts/djhtml) ("Django/Jinja" template indenter) | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/2)
-  - [Experimental] by [djLint](https://github.com/Riverside-Healthcare/djlint) (reformat HTML templates)
-- [Experimental] Lint (default: `false`)
+  - by [djLint](https://github.com/Riverside-Healthcare/djlint) (reformat HTML templates)
+- Lint (default: `false`)
   - by [djLint](https://github.com/Riverside-Healthcare/djlint) (Find common formatting issues) | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/6)
 - Hover | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/1)
 - CodeAction | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/3)
