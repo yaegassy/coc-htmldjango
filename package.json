@@ -142,6 +142,11 @@
           "type": "string",
           "default": "",
           "description": "Codes to ignore (--ignore)"
+        },
+        "htmldjango.djlint.indent": {
+          "type": "number",
+          "default": 4,
+          "description": "Indent spacing (--indent)"
         }
       }
     },
