@@ -5,6 +5,11 @@ import path from 'path';
 
 import which from 'which';
 
+import child_process from 'child_process';
+import util from 'util';
+
+const exec = util.promisify(child_process.exec);
+
 export function whichCmd(cmd: string): string {
   try {
     return which.sync(cmd);
@@ -84,4 +89,17 @@ export function getPythonPath(config: WorkspaceConfiguration, isRealpath?: boole
   }
 
   return pythonPath;
+}
+
+export async function getToolVersion(command: string): Promise<string | undefined> {
+  const versionCmd = `${command} --version`;
+  let versionStr = '';
+  try {
+    await exec(versionCmd).then((value) => {
+      versionStr = value.stdout.trim();
+    });
+    return versionStr;
+  } catch (error) {
+    return undefined;
+  }
 }

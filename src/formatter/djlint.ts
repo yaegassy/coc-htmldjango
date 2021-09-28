@@ -3,9 +3,10 @@ import { ExtensionContext, OutputChannel, Range, TextDocument, Uri, workspace, w
 import cp from 'child_process';
 import fs from 'fs';
 import tmp from 'tmp';
+import semver from 'semver';
 
 import { SUPPORT_LANGUAGES } from '../constant';
-import { resolveDjlintPath } from '../tool';
+import { getToolVersion, resolveDjlintPath } from '../tool';
 
 export async function doDjlintFormat(
   context: ExtensionContext,
@@ -18,6 +19,7 @@ export async function doDjlintFormat(
   }
 
   const extensionConfig = workspace.getConfiguration('htmldjango');
+  const indentLevel = extensionConfig.get<number>('djlint.indent', 4);
 
   const text = document.getText(range);
   const fileName = Uri.parse(document.uri).fsPath;
@@ -29,6 +31,15 @@ export async function doDjlintFormat(
     return text;
   }
 
+  let toolVersion: string | undefined;
+  const toolVersionStr = await getToolVersion(djlintPath);
+  if (toolVersionStr) {
+    const m = toolVersionStr.match(/(\d+.\d+.\d+)/);
+    if (m) {
+      toolVersion = m[0];
+    }
+  }
+
   const args: string[] = [];
   const cwd = Uri.file(workspace.root).fsPath;
   // Use shell
@@ -36,11 +47,17 @@ export async function doDjlintFormat(
 
   args.push('--reformat');
 
+  // MEMO: "--indent" option has been available since v0.4.4
+  if (toolVersion && semver.gte(toolVersion, '0.4.4')) {
+    args.push('--indent', indentLevel.toString());
+  }
+
   const tmpFile = tmp.fileSync();
   fs.writeFileSync(tmpFile.name, text);
 
   // ---- Output the command to be executed to channel log. ----
   outputChannel.appendLine(`${'#'.repeat(10)} djlint (format)\n`);
+  outputChannel.appendLine(`Ver: v${toolVersion}`);
   outputChannel.appendLine(`Cwd: ${opts.cwd}`);
   outputChannel.appendLine(`File: ${fileName}`);
   outputChannel.appendLine(`Args: ${args.join(' ')}`);
