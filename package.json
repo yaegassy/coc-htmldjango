@@ -163,16 +163,6 @@
         "command": "htmldjango.djlint.format",
         "title": "djLint format"
       }
-    ],
-    "snippets": [
-      {
-        "language": "htmldjango",
-        "path": "./snippets/tags.json"
-      },
-      {
-        "language": "htmldjango",
-        "path": "./snippets/filters.json"
-      }
     ]
   }
 }
