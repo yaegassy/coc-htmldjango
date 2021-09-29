@@ -17,6 +17,8 @@ import { installTools } from './installer';
 import { resolveDjhtmlPath, resolveDjlintPath, getPythonPath } from './tool';
 import { HtmlDjangoCodeActionProvider } from './action';
 import { LintEngine } from './lint';
+import { TagsSnippetsCompletionProvider } from './completion/tagsSnippetsCompletion';
+import { FiltersSnippetsCompletionProvider } from './completion/filtersSnippetsCompletion';
 
 interface Selectors {
   rangeLanguageSelector: DocumentSelector;
@@ -179,6 +181,25 @@ export async function activate(context: ExtensionContext): Promise<void> {
         subscriptions
       );
     }
+  }
+
+  const isEnableCompletion = extensionConfig.get<boolean>('completion.enable', true);
+  if (isEnableCompletion) {
+    context.subscriptions.push(
+      languages.registerCompletionItemProvider(
+        'htmldjango-tags',
+        'DJTags',
+        ['htmldjango'],
+        new TagsSnippetsCompletionProvider(context)
+      ),
+      languages.registerCompletionItemProvider(
+        'htmldjango-filters',
+        'DJFilters',
+        ['htmldjango'],
+        new FiltersSnippetsCompletionProvider(context),
+        ['|']
+      )
+    );
   }
 }
 
