@@ -79,6 +79,31 @@
           "default": true,
           "description": "Enable coc-htmldjango extension"
         },
+        "htmldjango.completion.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable snippets completion"
+        },
+        "htmldjango.completion.exclude": {
+          "type": "array",
+          "default": [
+            "autoescape_paste",
+            "comment_paste",
+            "comment_selection",
+            "for_paste",
+            "forempty_paste",
+            "if_paste",
+            "ifelse_paste",
+            "spaceless_paste",
+            "verbatim_paste",
+            "with_selection",
+            "with_paste",
+            "trans_paste",
+            "blocktrans_paste",
+            "blocktrans_with_paste"
+          ],
+          "description": "Exclude specific key in snippet completion"
+        },
         "htmldjango.hoverLang": {
           "type": "string",
           "default": "django",

@@ -11,11 +11,10 @@ django templates (htmldjango) extension for [coc.nvim](https://github.com/neocli
   - by [djLint](https://github.com/Riverside-Healthcare/djlint) (reformat HTML templates)
 - Lint (default: `false`)
   - by [djLint](https://github.com/Riverside-Healthcare/djlint) (Find common formatting issues) | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/6)
+- Completion
+  - Completion of snippets data via `completionItemProvider`
 - Hover | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/1)
 - CodeAction | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/3)
-- Snippets completion
-  - To use it, you need to install [coc-snippets](https://github.com/neoclide/coc-snippets).
-  - And set `snippets.loadFromExtensions` to true in "coc-settings.json"
 - Built-in installer (DjHTML, djLint)
 
 ## Install
@@ -35,11 +34,12 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 **Recommended coc extension**:
 
 - [coc-html](https://github.com/neoclide/coc-html)
-- [coc-snippets](https://github.com/neoclide/coc-snippets)
 
 ## Configuration options for coc-htmldjango
 
 - `htmldjango.enable`: Enable coc-htmldjango extension, default: `true`
+- `htmldjango.completion.enable`: Enable snippets completion, default: `true`
+- `htmldjango.completion.exclude`: Exclude specific key in snippet completion, default: `["autoescape_paste", "comment_paste", "comment_selection", "for_paste", "forempty_paste", "if_paste", "ifelse_paste", "spaceless_paste", "verbatim_paste", "with_selection", "with_paste", "trans_paste", "blocktrans_paste", "blocktrans_with_paste"]`
 - `htmldjango.builtin.pythonPath`: Python 3.x path (Absolute path) to be used for built-in install, default: `""`
 - `htmldjango.formatting.provider`: Provider for formatting. Possible options include 'djhtml', 'djlint', and 'none', default: `"djhtml"`
 - `htmldjango.djhtml.commandPath`: The custom path to the djhtml (Absolute path), default: `""`
