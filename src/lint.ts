@@ -12,6 +12,9 @@ import {
 } from 'coc.nvim';
 
 import cp from 'child_process';
+import semver from 'semver';
+
+import { getToolVersion } from './tool';
 
 import { SUPPORT_LANGUAGES } from './constant';
 
@@ -24,12 +27,14 @@ interface DjlintDiagnostics {
 
 export class LintEngine {
   private collection: DiagnosticCollection;
-  private cmdPath: string;
+  private toolPath: string;
+  private toolVersion: string | undefined;
   private outputChannel: OutputChannel;
 
-  constructor(cmdPath: string, outputChannel: OutputChannel) {
+  constructor(toolPath: string, toolVersion: string | undefined, outputChannel: OutputChannel) {
     this.collection = languages.createDiagnosticCollection('djlint');
-    this.cmdPath = cmdPath;
+    this.toolPath = toolPath;
+    this.toolVersion = toolVersion;
     this.outputChannel = outputChannel;
   }
 
@@ -45,23 +50,30 @@ export class LintEngine {
 
     const extensionConfig = workspace.getConfiguration('htmldjango');
     const ignoreRules = extensionConfig.get<string>('djlint.ignore', '');
+    const profile = extensionConfig.get<string>('djlint.profile', 'django');
 
     if (ignoreRules) {
       args.push('--ignore', ignoreRules);
     }
 
+    // MEMO: "--profile" option has been available since v0.4.5
+    if (this.toolVersion && semver.gte(this.toolVersion, '0.4.5')) {
+      args.push('--profile', profile);
+    }
+
     args.push('-');
 
     this.outputChannel.appendLine(`${'#'.repeat(10)} djlint (lint)\n`);
+    this.outputChannel.appendLine(`Ver: ${this.toolVersion}`);
     this.outputChannel.appendLine(`Cwd: ${opts.cwd}`);
     this.outputChannel.appendLine(`File: ${filePath}`);
     this.outputChannel.appendLine(`Args: ${args.join(' ')}`);
-    this.outputChannel.appendLine(`Run: ${self.cmdPath} ${args.join(' ')}`);
+    this.outputChannel.appendLine(`Run: ${self.toolPath} ${args.join(' ')}`);
 
     this.collection.clear();
 
     return new Promise(function (resolve) {
-      const cps = cp.spawn(self.cmdPath, args, opts);
+      const cps = cp.spawn(self.toolPath, args, opts);
       cps.stdin.write(textDocument.getText());
       cps.stdin.end();
       let stderrOutput = '';
@@ -139,7 +151,8 @@ export class LintEngine {
     const diagnostics: DjlintDiagnostics[] = [];
     const lines = s.split('\n');
 
-    const p = /^(?:(?<error>E\d+)|(?<warning>W\d+))\s(?<line>\d+):(?<col>\d+)\s(?<message>.+)$/;
+    // MEMO: rule name has been changed since v0.4.5.
+    const p = /^(?:(?<error>E\d+)|(?<warning>W\d+)|(?<template>T\d+)|(?<html>H\d+)|(?<django>D\d+)|(?<jinja>J\d+)|(?<nunjucks>N\d+)|(?<handlebars>M\d+))\s(?<line>\d+):(?<col>\d+)\s(?<message>.+)$/;
 
     for (const v of lines) {
       let ruleName: string | undefined;
@@ -149,10 +162,23 @@ export class LintEngine {
 
       const m = v.match(p);
       if (m) {
+        // MEMO: rule name has been changed since v0.4.5.
         if (m.groups?.error) {
           ruleName = m.groups.error;
         } else if (m.groups?.warning) {
           ruleName = m.groups.warning;
+        } else if (m.groups?.template) {
+          ruleName = m.groups.template;
+        } else if (m.groups?.html) {
+          ruleName = m.groups.html;
+        } else if (m.groups?.django) {
+          ruleName = m.groups.django;
+        } else if (m.groups?.jinja) {
+          ruleName = m.groups.jinja;
+        } else if (m.groups?.nunjucks) {
+          ruleName = m.groups.nunjucks;
+        } else if (m.groups?.handlebars) {
+          ruleName = m.groups.handlebars;
         }
 
         line = m.groups?.line ? Number(m.groups.line) : undefined;
@@ -180,9 +206,24 @@ export class LintEngine {
     if (s.startsWith('W')) {
       severityNumber = DiagnosticSeverity.Warning;
     }
-
     if (s.startsWith('E')) {
       severityNumber = DiagnosticSeverity.Error;
+    }
+    // MEMO: rule name has been changed since v0.4.5.
+    if (s.startsWith('T')) {
+      severityNumber = DiagnosticSeverity.Warning;
+    }
+    if (s.startsWith('D')) {
+      severityNumber = DiagnosticSeverity.Warning;
+    }
+    if (s.startsWith('J')) {
+      severityNumber = DiagnosticSeverity.Warning;
+    }
+    if (s.startsWith('N')) {
+      severityNumber = DiagnosticSeverity.Warning;
+    }
+    if (s.startsWith('H')) {
+      severityNumber = DiagnosticSeverity.Warning;
     }
 
     switch (severityNumber) {
@@ -195,10 +236,22 @@ export class LintEngine {
         break;
 
       default:
-        severity = DiagnosticSeverity.Error;
+        severity = DiagnosticSeverity.Warning;
         break;
     }
 
     return severity;
+  }
+
+  public async getVersion(cmdPath: string) {
+    let toolVersion: string | undefined;
+    const toolVersionStr = await getToolVersion(cmdPath);
+    if (toolVersionStr) {
+      const m = toolVersionStr.match(/(\d+.\d+.\d+)/);
+      if (m) {
+        toolVersion = m[0];
+      }
+    }
+    return toolVersion;
   }
 }
