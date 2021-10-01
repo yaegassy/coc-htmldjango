@@ -19,6 +19,7 @@ import { HtmlDjangoCodeActionProvider } from './action';
 import { LintEngine } from './lint';
 import { TagsSnippetsCompletionProvider } from './completion/tagsSnippetsCompletion';
 import { FiltersSnippetsCompletionProvider } from './completion/filtersSnippetsCompletion';
+import { getToolVersion } from './tool';
 
 interface Selectors {
   rangeLanguageSelector: DocumentSelector;
@@ -143,7 +144,16 @@ export async function activate(context: ExtensionContext): Promise<void> {
   const codeActionProvider = new HtmlDjangoCodeActionProvider();
   context.subscriptions.push(languages.registerCodeActionProvider(languageSelector, codeActionProvider, 'htmldjango'));
 
-  const engine = new LintEngine(djlintPath, outputChannel);
+  let djlintVersion: string | undefined;
+  const djlintVersionStr = await getToolVersion(djlintPath);
+  if (djlintVersionStr) {
+    const m = djlintVersionStr.match(/(\d+.\d+.\d+)/);
+    if (m) {
+      djlintVersion = m[0];
+    }
+  }
+
+  const engine = new LintEngine(djlintPath, djlintVersion, outputChannel);
   if (djlintPath && djlintEnableLint) {
     const onOpen = extensionConfig.get<boolean>('djlint.lintOnOpen');
     if (onOpen) {

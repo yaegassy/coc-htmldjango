@@ -20,6 +20,7 @@ export async function doDjlintFormat(
 
   const extensionConfig = workspace.getConfiguration('htmldjango');
   const indentLevel = extensionConfig.get<number>('djlint.indent', 4);
+  const profile = extensionConfig.get<string>('djlint.profile', 'django');
 
   const text = document.getText(range);
   const fileName = Uri.parse(document.uri).fsPath;
@@ -52,12 +53,17 @@ export async function doDjlintFormat(
     args.push('--indent', indentLevel.toString());
   }
 
+  // MEMO: "--profile" option has been available since v0.4.5
+  if (toolVersion && semver.gte(toolVersion, '0.4.5')) {
+    args.push('--profile', profile);
+  }
+
   const tmpFile = tmp.fileSync();
   fs.writeFileSync(tmpFile.name, text);
 
   // ---- Output the command to be executed to channel log. ----
   outputChannel.appendLine(`${'#'.repeat(10)} djlint (format)\n`);
-  outputChannel.appendLine(`Ver: v${toolVersion}`);
+  outputChannel.appendLine(`Ver: ${toolVersion}`);
   outputChannel.appendLine(`Cwd: ${opts.cwd}`);
   outputChannel.appendLine(`File: ${fileName}`);
   outputChannel.appendLine(`Args: ${args.join(' ')}`);

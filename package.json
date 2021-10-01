@@ -172,6 +172,17 @@
           "type": "number",
           "default": 4,
           "description": "Indent spacing (--indent)"
+        },
+        "htmldjango.djlint.profile": {
+          "type": "string",
+          "default": "django",
+          "description": "Enable defaults by template language (--profile). ops: django, jinja, nunjucks, handlebars",
+          "enum": [
+            "djhtml",
+            "jinja",
+            "nunjucks",
+            "handlebars"
+          ]
         }
       }
     },
