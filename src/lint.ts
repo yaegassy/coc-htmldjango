@@ -213,6 +213,9 @@ export class LintEngine {
     if (s.startsWith('T')) {
       severityNumber = DiagnosticSeverity.Warning;
     }
+    if (s.startsWith('H')) {
+      severityNumber = DiagnosticSeverity.Warning;
+    }
     if (s.startsWith('D')) {
       severityNumber = DiagnosticSeverity.Warning;
     }
@@ -220,9 +223,6 @@ export class LintEngine {
       severityNumber = DiagnosticSeverity.Warning;
     }
     if (s.startsWith('N')) {
-      severityNumber = DiagnosticSeverity.Warning;
-    }
-    if (s.startsWith('H')) {
       severityNumber = DiagnosticSeverity.Warning;
     }
 
