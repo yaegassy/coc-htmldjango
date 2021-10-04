@@ -17,14 +17,14 @@ export async function doDjhtmlFormat(
 
   const extensionConfig = workspace.getConfiguration('htmldjango');
 
-  const text = document.getText(range);
   const fileName = Uri.parse(document.uri).fsPath;
+  const originalText = document.getText(range);
 
   let djhtmlPath = extensionConfig.get('djhtml.commandPath', '');
   djhtmlPath = resolveDjhtmlPath(context, djhtmlPath);
   if (!djhtmlPath) {
     window.showErrorMessage('Unable to find the "djhtml" command.');
-    return text;
+    return originalText;
   }
 
   const tabwidth = extensionConfig.get('djhtml.tabWidth', 4);
@@ -44,6 +44,7 @@ export async function doDjhtmlFormat(
   outputChannel.appendLine(`Run: ${djhtmlPath} ${args.join(' ')}`);
 
   return new Promise((resolve) => {
+    let newText = '';
     const cps = cp.spawn(djhtmlPath, args, opts);
 
     cps.on('error', (err: Error) => {
@@ -53,7 +54,7 @@ export async function doDjhtmlFormat(
     });
 
     if (cps.pid) {
-      cps.stdin.write(text);
+      cps.stdin.write(originalText);
       cps.stdin.end();
 
       cps.stderr.on('data', (data: Buffer) => {
@@ -61,14 +62,21 @@ export async function doDjhtmlFormat(
         outputChannel.appendLine(`${data}`);
 
         // rollback
-        resolve(text);
+        resolve(originalText);
       });
 
       cps.stdout.on('data', (data: Buffer) => {
-        outputChannel.appendLine(`\n==== STDOUT ===\n`);
+        outputChannel.appendLine(`\n==== STDOUT (data) ===\n`);
         outputChannel.appendLine(`${data}`);
 
-        resolve(data.toString());
+        newText = newText + data.toString();
+      });
+
+      cps.stdout.on('close', () => {
+        outputChannel.appendLine(`\n==== STDOUT (close) ===\n`);
+        outputChannel.appendLine(`${newText}`);
+        // auto-fixed
+        resolve(newText);
       });
     }
   });
