@@ -45,7 +45,7 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 - `htmldjango.djhtml.commandPath`: The custom path to the djhtml (Absolute path), default: `""`
 - `htmldjango.djhtml.tabWidth`: Set tabwidth (--tabwidth), default: `4`
 - `htmldjango.djlint.commandPath`: The custom path to the djlint (Absolute path), default: `""`
-- `htmldjango.djlint.enable`: Enable djLint (diagnostics), default: `false`
+- `htmldjango.djlint.enableLint`: Enable djLint lint (diagnostics), default: `false`
 - `htmldjango.djlint.lintOnOpen`: Lint file on opening, default: `true`
 - `htmldjango.djlint.lintOnChange`: Lint file on change, default: `true`
 - `htmldjango.djlint.lintOnSave`: Lint file on save, default: `true`
