@@ -41,7 +41,8 @@ export class FiltersSnippetsCompletionProvider implements CompletionItemProvider
       const snippetsJson: SnippetsJsonType = JSON.parse(snippetsJsonText);
       if (snippetsJson) {
         Object.keys(snippetsJson).map((key) => {
-          // Check exclude
+          // **Check exclude**:
+          // Some snippets in vscode-django have duplicate prefixes, so use the key name
           if (this.excludeSnippetsKeys.includes(key)) return;
 
           let snippetsText: string;
@@ -52,8 +53,8 @@ export class FiltersSnippetsCompletionProvider implements CompletionItemProvider
             snippetsText = body;
           }
 
-          // In coc-htmldjango, insertText is handled by resolveCompletionItem.
-          // In provideCompletionItems, if insertText contains only snippets data,
+          // In this extention, "insertText" is handled by "resolveCompletionItem".
+          // In "provideCompletionItems", if "insertText" contains only snippets data,
           // it will be empty when the candidate is selected.
           snippetsCompletionList.push({
             label: snippetsJson[key].prefix,
