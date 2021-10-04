@@ -69,8 +69,12 @@ nmap <silent> ga <Plug>(coc-codeaction-line)
 
 **Actions**:
 
-- `Add {# fmt:off #} for this line`
-- `Add {# fmt:on #} for this line`
+- If `htmldjango.formatting.provider` is `djhtml`
+  - `Add {# fmt:off #} for this line`
+  - `Add {# fmt:on #} for this line`
+- If `htmldjango.formatting.provider` is `djlint` or If `htmldjango.djlint.enableLint` is `true`
+  - `Add {% djlint:off %} for this line`
+  - `Add {% djlint:on %} for this line`
 
 ## Bult-in install (DjHTML, djLint)
 
