@@ -11,7 +11,7 @@ import {
 
 export class HtmlDjangoCodeActionProvider implements CodeActionProvider {
   private formattingProvider: string | undefined;
-  djlintEnableLint: boolean;
+  private djlintEnableLint: boolean;
 
   constructor() {
     const extConfig = workspace.getConfiguration('htmldjango');
