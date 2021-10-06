@@ -23,7 +23,7 @@
     "url": "https://github.com/yaegassy/coc-htmldjango"
   },
   "scripts": {
-    "snippets": "yarn snippets:tags && yarn snippets:filters && node cleaning.js",
+    "snippets": "yarn snippets:tags && yarn snippets:filters && node fixSnippets.js",
     "snippets:tags": "curl -o snippets/tags.json https://raw.githubusercontent.com/vscode-django/vscode-django/main/snippets/templates/tags.json",
     "snippets:filters": "curl -o snippets/filters.json https://raw.githubusercontent.com/vscode-django/vscode-django/main/snippets/templates/filters.json",
     "lint": "eslint src --ext ts",
