@@ -3,7 +3,7 @@ import { ExtensionContext, workspace, HoverProvider, TextDocument, Position, Hov
 import fs from 'fs';
 import path from 'path';
 
-import { djangoHovers, jinja2Hovers, HtmlDjangoHover } from './hoverLang';
+import { djangoHovers, jinja2Hovers, HtmlDjangoHover } from './lang';
 
 export class HtmlDjangoHoverProvider implements HoverProvider {
   private context: ExtensionContext;
