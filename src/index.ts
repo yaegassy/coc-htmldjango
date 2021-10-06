@@ -12,7 +12,7 @@ import {
 import fs from 'fs';
 
 import HtmlDjangoFormattingEditProvider, { fullDocumentRange } from './format';
-import { HtmlDjangoHoverProvider } from './hover/htmlDjangoHoverProvider';
+import { HtmlDjangoHoverProvider } from './hover/htmlDjangoHover';
 import { installTools } from './installer';
 import { resolveDjhtmlPath, resolveDjlintPath, getPythonPath } from './tool';
 import { HtmlDjangoCodeActionProvider } from './action';
