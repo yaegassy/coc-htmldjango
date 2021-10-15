@@ -96,7 +96,7 @@ export class HtmlDjangoCodeActionProvider implements CodeActionProvider {
     // djlint
     //
     if (this.formattingProvider === 'djlint' || this.djlintEnableLint) {
-      /** Add {% djlint:off %} for this line (htmldjango) */
+      /** Add <!-- djlint:off --> for this line (htmldjango) */
       if (this.lineRange(range)) {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const line = doc.getline(range.start.line);
@@ -105,15 +105,15 @@ export class HtmlDjangoCodeActionProvider implements CodeActionProvider {
         const thisLineTrimLength = doc.getline(range.start.line).trim().length;
         const suppressLineLength = thisLineFullLength - thisLineTrimLength;
 
-        let suppressLineNewText = '{% djlint:off %}\n';
+        let suppressLineNewText = '<!-- djlint:off -->\n';
         if (suppressLineLength > 0) {
           const addIndentSpace = ' '.repeat(suppressLineLength);
-          suppressLineNewText = '{% djlint:off %}\n' + addIndentSpace;
+          suppressLineNewText = '<!-- djlint:off -->\n' + addIndentSpace;
         }
 
         const edit = TextEdit.insert(Position.create(range.start.line, suppressLineLength), suppressLineNewText);
         codeActions.push({
-          title: 'Add {% djlint:off %} for this line',
+          title: 'Add <!-- djlint:off --> for this line',
           edit: {
             changes: {
               [doc.uri]: [edit],
@@ -122,7 +122,7 @@ export class HtmlDjangoCodeActionProvider implements CodeActionProvider {
         });
       }
 
-      /** Add {% djlint:on %} for this line (htmldjango) */
+      /** Add <!-- djlint:on --> for this line (htmldjango) */
       if (this.lineRange(range)) {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const line = doc.getline(range.start.line);
@@ -131,15 +131,15 @@ export class HtmlDjangoCodeActionProvider implements CodeActionProvider {
         const thisLineTrimLength = doc.getline(range.start.line).trim().length;
         const suppressLineLength = thisLineFullLength - thisLineTrimLength;
 
-        let suppressLineNewText = '{% djlint:on %}\n';
+        let suppressLineNewText = '<!-- djlint:on -->\n';
         if (suppressLineLength > 0) {
           const addIndentSpace = ' '.repeat(suppressLineLength);
-          suppressLineNewText = '{% djlint:on %}\n' + addIndentSpace;
+          suppressLineNewText = '<!-- djlint:on -->\n' + addIndentSpace;
         }
 
         const edit = TextEdit.insert(Position.create(range.start.line, suppressLineLength), suppressLineNewText);
         codeActions.push({
-          title: 'Add {% djlint:on %} for this line',
+          title: 'Add <!-- djlint:on --> for this line',
           edit: {
             changes: {
               [doc.uri]: [edit],
