@@ -51,6 +51,7 @@ export class LintEngine {
     const extensionConfig = workspace.getConfiguration('htmldjango');
     const ignoreRules = extensionConfig.get<string>('djlint.ignore', '');
     const profile = extensionConfig.get<string>('djlint.profile', 'django');
+    const useGitIgnore = extensionConfig.get<boolean>('djlint.useGitIgnore', false);
 
     if (ignoreRules) {
       args.push('--ignore', ignoreRules);
@@ -59,6 +60,11 @@ export class LintEngine {
     // MEMO: "--profile" option has been available since v0.4.5
     if (this.toolVersion && semver.gte(this.toolVersion, '0.4.5')) {
       args.push('--profile', profile);
+    }
+
+    // MEMO: "--use-gitignore" option has been available since v0.5.9
+    if (this.toolVersion && semver.gte(this.toolVersion, '0.5.9')) {
+      if (useGitIgnore) args.push('--use-gitignore');
     }
 
     args.push('-');
