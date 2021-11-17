@@ -231,6 +231,9 @@ export class LintEngine {
     if (s.startsWith('N')) {
       severityNumber = DiagnosticSeverity.Warning;
     }
+    if (s.startsWith('M')) {
+      severityNumber = DiagnosticSeverity.Warning;
+    }
 
     switch (severityNumber) {
       case 1:
