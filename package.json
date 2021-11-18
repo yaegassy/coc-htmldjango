@@ -178,7 +178,7 @@
           "default": "django",
           "description": "Enable defaults by template language (--profile). ops: django, jinja, nunjucks, handlebars",
           "enum": [
-            "djhtml",
+            "django",
             "jinja",
             "nunjucks",
             "handlebars"
