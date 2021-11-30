@@ -35,6 +35,14 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 
 - [coc-html](https://github.com/neoclide/coc-html)
 
+## Tool (linter & formatter) detection
+
+**Detection order**:
+
+- `htmldjango.djhtml.commandPath` and `htmldjango.djlint.commandPath` settings
+- current python environment (e.g. `djhtml` and `djlint` in "venv")
+- builtin `djhtml` and `djlint` (Installation commands are also provided)
+
 ## Configuration options for coc-htmldjango
 
 - `htmldjango.enable`: Enable coc-htmldjango extension, default: `true`
