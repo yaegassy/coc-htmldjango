@@ -178,11 +178,13 @@
           "default": "django",
           "description": "Enable defaults by template language (--profile). ops: django, jinja, nunjucks, handlebars, golang",
           "enum": [
+            "html",
             "django",
             "jinja",
             "nunjucks",
             "handlebars",
-            "golang"
+            "golang",
+            "angular"
           ]
         },
         "htmldjango.djlint.useGitIgnore": {
