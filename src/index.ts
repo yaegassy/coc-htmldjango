@@ -69,6 +69,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
   subscriptions.push(
     commands.registerCommand('htmldjango.builtin.installTools', async () => {
       await installWrapper(pythonCommand, context);
+      workspace.nvim.command(`CocRestart`, true);
     })
   );
 
