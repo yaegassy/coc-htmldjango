@@ -196,6 +196,10 @@
     },
     "commands": [
       {
+        "command": "htmldjango.showOutput",
+        "title": "Show htmldjango output channel"
+      },
+      {
         "command": "htmldjango.builtin.installTools",
         "title": "Install htmldjango related tools"
       },
