@@ -64,6 +64,7 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 
 ## Commands
 
+- `htmldjango.showOutput`
 - `htmldjango.builtin.installTools`
 - `htmldjango.djhtml.format`
 - `htmldjango.djlint.format`
