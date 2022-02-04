@@ -2,7 +2,7 @@
   "name": "coc-htmldjango",
   "version": "0.9.0",
   "djlintVersion": "0.7.4",
-  "djhtmlVersion": "1.4.11",
+  "djhtmlVersion": "1.4.12",
   "description": "django templates (htmldjango) extension for coc.nvim. Provides formatter, snippets completion and more...",
   "author": "yaegassy <yosstools@gmail.com>",
   "license": "MIT",
