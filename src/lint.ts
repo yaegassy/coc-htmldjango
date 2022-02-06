@@ -158,7 +158,8 @@ export class LintEngine {
     const lines = s.split('\n');
 
     // MEMO: rule name has been changed since v0.4.5.
-    const p = /^(?:(?<error>E\d+)|(?<warning>W\d+)|(?<template>T\d+)|(?<html>H\d+)|(?<django>D\d+)|(?<jinja>J\d+)|(?<nunjucks>N\d+)|(?<handlebars>M\d+))\s(?<line>\d+):(?<col>\d+)\s(?<message>.+)$/;
+    const p =
+      /^(?:(?<error>E\d+)|(?<warning>W\d+)|(?<template>T\d+)|(?<html>H\d+)|(?<django>D\d+)|(?<jinja>J\d+)|(?<nunjucks>N\d+)|(?<handlebars>M\d+))\s(?<line>\d+):(?<col>\d+)\s(?<message>.+)$/;
 
     for (const v of lines) {
       let ruleName: string | undefined;
