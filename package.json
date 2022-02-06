@@ -43,7 +43,7 @@
     "@types/semver": "^7.3.8",
     "@types/tmp": "^0.2.0",
     "@types/which": "^2.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.8.2",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
     "coc.nvim": "^0.0.80",
     "esbuild": "^0.14.18",
