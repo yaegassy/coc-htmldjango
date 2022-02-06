@@ -11,7 +11,6 @@ async function start(watch) {
     platform: 'node',
     target: 'node10.12',
     outfile: 'lib/index.js',
-    logLevel: 'error', // suppress "require"  warning
   });
 }
 
