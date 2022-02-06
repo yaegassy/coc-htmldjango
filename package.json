@@ -50,7 +50,7 @@
     "eslint": "^8.8.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.2.0",
+    "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
     "semver": "^7.3.5",
     "tmp": "^0.1.0",
