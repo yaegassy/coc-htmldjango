@@ -61,7 +61,7 @@ export class FiltersSnippetsCompletionProvider implements CompletionItemProvider
             kind: CompletionItemKind.Snippet,
             filterText: snippetsJson[key].prefix,
             detail: snippetsJson[key].description,
-            documentation: snippetsText,
+            documentation: { kind: 'markdown', value: '```htmldjango\n' + snippetsText + '\n```' },
             insertTextFormat: InsertTextFormat.Snippet,
             // The "snippetsText" that will eventually be added to the insertText
             // will be stored in the "data" key
