@@ -65,7 +65,8 @@
       {
         "filetype": "htmldjango",
         "patterns": [
-          "pyproject.toml"
+          "pyproject.toml",
+          ".djlintrc"
         ]
       }
     ],
