@@ -100,7 +100,10 @@
             "with_paste",
             "trans_paste",
             "blocktrans_paste",
-            "blocktrans_with_paste"
+            "blocktrans_with_paste",
+            "translate_paste",
+            "blocktranslate_paste",
+            "blocktranslate_with_paste"
           ],
           "description": "Exclude specific key in snippet completion"
         },

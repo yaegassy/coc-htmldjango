@@ -47,7 +47,7 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 
 - `htmldjango.enable`: Enable coc-htmldjango extension, default: `true`
 - `htmldjango.completion.enable`: Enable snippets completion, default: `true`
-- `htmldjango.completion.exclude`: Exclude specific key in snippet completion, default: `["autoescape_paste", "comment_paste", "comment_selection", "for_paste", "forempty_paste", "if_paste", "ifelse_paste", "spaceless_paste", "verbatim_paste", "with_selection", "with_paste", "trans_paste", "blocktrans_paste", "blocktrans_with_paste"]`
+- `htmldjango.completion.exclude`: Exclude specific key in snippet completion, default: `["autoescape_paste", "comment_paste", "comment_selection", "for_paste", "forempty_paste", "if_paste", "ifelse_paste", "spaceless_paste", "verbatim_paste", "with_selection", "with_paste", "trans_paste", "blocktrans_paste", "blocktrans_with_paste", "translate_paste", "blocktranslate_paste", "blocktranslate_with_paste"]`
 - `htmldjango.builtin.pythonPath`: Python 3.x path (Absolute path) to be used for built-in install, default: `""`
 - `htmldjango.formatting.provider`: Provider for formatting. Possible options include 'djhtml', 'djlint', and 'none', default: `"djhtml"`
 - `htmldjango.djhtml.commandPath`: The custom path to the djhtml (Absolute path), default: `""`
