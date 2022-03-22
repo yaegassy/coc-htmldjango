@@ -91,7 +91,7 @@ nmap <silent> ga <Plug>(coc-codeaction-line)
 coc-htmldjango allows you to create an extension-only "venv" and install "djhtml" and "djlint".
 
 ```vim
-:CocComannd htmldjango.builtin.installTools
+:CocCommand htmldjango.builtin.installTools
 ```
 
 ## Thanks
