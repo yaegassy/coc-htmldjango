@@ -1,9 +1,9 @@
-import { ExtensionContext, workspace, HoverProvider, TextDocument, Position, Hover } from 'coc.nvim';
+import { ExtensionContext, Hover, HoverProvider, Position, TextDocument, workspace } from 'coc.nvim';
 
 import fs from 'fs';
 import path from 'path';
 
-import { djangoHovers, jinja2Hovers, HtmlDjangoHover } from './lang';
+import { djangoHovers, HtmlDjangoHover, jinja2Hovers } from './lang';
 
 export class HtmlDjangoHoverProvider implements HoverProvider {
   private context: ExtensionContext;

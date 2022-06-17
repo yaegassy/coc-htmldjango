@@ -11,15 +11,14 @@ import {
 
 import fs from 'fs';
 
+import { HtmlDjangoCodeActionProvider } from './action';
+import { FiltersSnippetsCompletionProvider } from './completion/filtersSnippetsCompletion';
+import { TagsSnippetsCompletionProvider } from './completion/tagsSnippetsCompletion';
 import HtmlDjangoFormattingEditProvider, { fullDocumentRange } from './format';
 import { HtmlDjangoHoverProvider } from './hover/htmlDjangoHover';
 import { installTools } from './installer';
-import { resolveDjhtmlPath, resolveDjlintPath, getPythonPath } from './tool';
-import { HtmlDjangoCodeActionProvider } from './action';
 import { LintEngine } from './lint';
-import { TagsSnippetsCompletionProvider } from './completion/tagsSnippetsCompletion';
-import { FiltersSnippetsCompletionProvider } from './completion/filtersSnippetsCompletion';
-import { getToolVersion } from './tool';
+import { getPythonPath, getToolVersion, resolveDjhtmlPath, resolveDjlintPath } from './tool';
 
 interface Selectors {
   rangeLanguageSelector: DocumentSelector;

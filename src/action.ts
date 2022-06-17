@@ -4,8 +4,8 @@ import {
   CodeActionProvider,
   Position,
   Range,
-  TextEdit,
   TextDocument,
+  TextEdit,
   workspace,
 } from 'coc.nvim';
 

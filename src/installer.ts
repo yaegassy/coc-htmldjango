@@ -2,8 +2,8 @@ import { ExtensionContext, window } from 'coc.nvim';
 
 import path from 'path';
 
-import rimraf from 'rimraf';
 import child_process from 'child_process';
+import rimraf from 'rimraf';
 import util from 'util';
 
 import { DJHTML_VERSION, DJLINT_VERSION } from './constant';

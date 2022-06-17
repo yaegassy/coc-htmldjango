@@ -12,8 +12,8 @@ import {
   workspace,
 } from 'coc.nvim';
 
-import path from 'path';
 import fs from 'fs';
+import path from 'path';
 
 type SnippetsJsonType = {
   [key: string]: {
