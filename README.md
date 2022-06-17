@@ -61,6 +61,7 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 - `htmldjango.djlint.indent`: Indent spacing (`--indent`), default: `4`
 - `htmldjango.djlint.profile`: Enable defaults by template language. ops: html, django, jinja, nunjucks, handlebars, golang and angular, default: `["django"]`
 - `htmldjango.djlint.useGitIgnore`: Use .gitignore file to extend excludes (`--use-gitignore`), default: `false`
+- `htmldjango.djlint.preserveLeadingSpace`: Attempt to preserve leading space on text (`--preserve-leading-space`), default: `false`
 
 ## Commands
 

@@ -21,6 +21,7 @@ export async function doDjlintFormat(
   const extensionConfig = workspace.getConfiguration('htmldjango');
   const indentLevel = extensionConfig.get<number>('djlint.indent', 4);
   const profile = extensionConfig.get<string>('djlint.profile', 'django');
+  const preserveLeadingSpace = extensionConfig.get<boolean>('djlint.preserveLeadingSpace', false);
 
   const text = document.getText(range);
   const fileName = Uri.parse(document.uri).fsPath;
@@ -56,6 +57,11 @@ export async function doDjlintFormat(
   // MEMO: "--profile" option has been available since v0.4.5
   if (toolVersion && semver.gte(toolVersion, '0.4.5')) {
     args.push('--profile', profile);
+  }
+
+  // MEMO: "--preserve-leading-space" option has been available since v1.2.0
+  if (toolVersion && semver.gte(toolVersion, '1.2.0')) {
+    if (preserveLeadingSpace) args.push('--preserve-leading-space');
   }
 
   const tmpFile = tmp.fileSync();

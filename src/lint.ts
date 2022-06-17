@@ -52,6 +52,7 @@ export class LintEngine {
     const ignoreRules = extensionConfig.get<string>('djlint.ignore', '');
     const profile = extensionConfig.get<string>('djlint.profile', 'django');
     const useGitIgnore = extensionConfig.get<boolean>('djlint.useGitIgnore', false);
+    const preserveLeadingSpace = extensionConfig.get<boolean>('djlint.preserveLeadingSpace', false);
 
     if (ignoreRules) {
       args.push('--ignore', ignoreRules);
@@ -65,6 +66,11 @@ export class LintEngine {
     // MEMO: "--use-gitignore" option has been available since v0.5.9
     if (this.toolVersion && semver.gte(this.toolVersion, '0.5.9')) {
       if (useGitIgnore) args.push('--use-gitignore');
+    }
+
+    // MEMO: "--preserve-leading-space" option has been available since v1.2.0
+    if (this.toolVersion && semver.gte(this.toolVersion, '1.2.0')) {
+      if (preserveLeadingSpace) args.push('--preserve-leading-space');
     }
 
     args.push('-');

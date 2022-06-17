@@ -194,6 +194,11 @@
           "type": "boolean",
           "default": false,
           "description": "Use .gitignore file to extend excludes (--use-gitignore)"
+        },
+        "htmldjango.djlint.preserveLeadingSpace": {
+          "type": "boolean",
+          "default": false,
+          "description": "Attempt to preserve leading space on text (--preserve-leading-space)"
         }
       }
     },
