@@ -28,10 +28,10 @@ export async function installTools(pythonCommand: string, context: ExtensionCont
 
   rimraf.sync(pathVenv);
   try {
-    window.showMessage(`Install htmldjango related tools...`);
+    window.showInformationMessage(`Install htmldjango related tools...`);
     await exec(installCmd);
     statusItem.hide();
-    window.showMessage(`htmldjango: Installation is complete!`);
+    window.showInformationMessage(`htmldjango: Installation is complete!`);
   } catch (error) {
     statusItem.hide();
     window.showErrorMessage(`htmldjango: Installation has failed. | ${error}`);
