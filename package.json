@@ -199,6 +199,11 @@
           "type": "boolean",
           "default": false,
           "description": "Attempt to preserve leading space on text (--preserve-leading-space)"
+        },
+        "htmldjango.djlint.preserveBlankLines": {
+          "type": "boolean",
+          "default": false,
+          "description": "Attempt to preserve blank lines (--preserve-blank-lines)"
         }
       }
     },

@@ -53,6 +53,7 @@ export class LintEngine {
     const profile = extensionConfig.get<string>('djlint.profile', 'django');
     const useGitIgnore = extensionConfig.get<boolean>('djlint.useGitIgnore', false);
     const preserveLeadingSpace = extensionConfig.get<boolean>('djlint.preserveLeadingSpace', false);
+    const preserveBlankLines = extensionConfig.get<boolean>('djlint.preserveBlankLines', false);
 
     if (ignoreRules) {
       args.push('--ignore', ignoreRules);
@@ -71,6 +72,11 @@ export class LintEngine {
     // MEMO: "--preserve-leading-space" option has been available since v1.2.0
     if (this.toolVersion && semver.gte(this.toolVersion, '1.2.0')) {
       if (preserveLeadingSpace) args.push('--preserve-leading-space');
+    }
+
+    // MEMO: "--preserve-blank-lines" option has been available since v1.3.0
+    if (this.toolVersion && semver.gte(this.toolVersion, '1.3.0')) {
+      if (preserveBlankLines) args.push('--preserve-blank-lines');
     }
 
     args.push('-');

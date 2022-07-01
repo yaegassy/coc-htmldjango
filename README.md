@@ -62,6 +62,7 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 - `htmldjango.djlint.profile`: Enable defaults by template language. ops: html, django, jinja, nunjucks, handlebars, golang and angular, default: `["django"]`
 - `htmldjango.djlint.useGitIgnore`: Use .gitignore file to extend excludes (`--use-gitignore`), default: `false`
 - `htmldjango.djlint.preserveLeadingSpace`: Attempt to preserve leading space on text (`--preserve-leading-space`), default: `false`
+- `htmldjango.djlint.preserveBlankLines`: Attempt to preserve blank lines (`--preserve-blank-lines`), default: `false`
 
 ## Commands
 
