@@ -63,6 +63,8 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 - `htmldjango.djlint.useGitIgnore`: Use .gitignore file to extend excludes (`--use-gitignore`), default: `false`
 - `htmldjango.djlint.preserveLeadingSpace`: Attempt to preserve leading space on text (`--preserve-leading-space`), default: `false`
 - `htmldjango.djlint.preserveBlankLines`: Attempt to preserve blank lines (`--preserve-blank-lines`), default: `false`
+- `htmldjango.djlint.formatCss`: Also format contents of style tags (`--format-css`), default: `false`
+- `htmldjango.djlint.formatJs`: Also format contents of script tags (`--format-js`), default: `false`
 
 ## Commands
 
