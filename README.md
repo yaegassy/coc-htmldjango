@@ -9,7 +9,7 @@ django templates (htmldjango) extension for [coc.nvim](https://github.com/neocli
 - Format
   - by [djLint](https://github.com/Riverside-Healthcare/djlint) (reformat HTML templates) | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/6)
   - by [DjHTML](https://github.com/rtts/djhtml) ("Django/Jinja" template indenter) | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/2)
-- Lint (default: `false`)
+- Lint
   - by [djLint](https://github.com/Riverside-Healthcare/djlint) (Find common formatting issues) | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/6)
 - Completion
   - Completion of snippets data via `completionItemProvider`
@@ -51,7 +51,7 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 - `htmldjango.builtin.pythonPath`: Python 3.x path (Absolute path) to be used for built-in install, default: `""`
 - `htmldjango.formatting.provider`: Provider for formatting. Possible options include 'djlint', 'djhtml' and 'none', default: `"djlint"`
 - `htmldjango.djlint.commandPath`: The custom path to the djlint (Absolute path), default: `""`
-- `htmldjango.djlint.enableLint`: Enable djLint lint (diagnostics), default: `false`
+- `htmldjango.djlint.enableLint`: Enable djLint lint (diagnostics), default: `true`
 - `htmldjango.djlint.lintOnOpen`: Lint file on opening, default: `true`
 - `htmldjango.djlint.lintOnChange`: Lint file on change, default: `true`
 - `htmldjango.djlint.lintOnSave`: Lint file on save, default: `true`
