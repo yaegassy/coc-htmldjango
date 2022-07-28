@@ -7,15 +7,15 @@ django templates (htmldjango) extension for [coc.nvim](https://github.com/neocli
 ## Features
 
 - Format
+  - by [djLint](https://github.com/Riverside-Healthcare/djlint) (reformat HTML templates) | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/6)
   - by [DjHTML](https://github.com/rtts/djhtml) ("Django/Jinja" template indenter) | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/2)
-  - by [djLint](https://github.com/Riverside-Healthcare/djlint) (reformat HTML templates)
 - Lint (default: `false`)
   - by [djLint](https://github.com/Riverside-Healthcare/djlint) (Find common formatting issues) | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/6)
 - Completion
   - Completion of snippets data via `completionItemProvider`
 - Hover | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/1)
 - CodeAction | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/3)
-- Built-in installer (DjHTML, djLint)
+- Built-in installer (djLint, DjHTML)
 
 ## Install
 
@@ -31,7 +31,7 @@ django templates (htmldjango) extension for [coc.nvim](https://github.com/neocli
 Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 ```
 
-**Recommended coc extension**:
+**Recommended coc-extensions to install together**
 
 - [coc-html](https://github.com/neoclide/coc-html)
 
@@ -39,9 +39,9 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 
 **Detection order**:
 
-- `htmldjango.djhtml.commandPath` and `htmldjango.djlint.commandPath` settings
-- current python environment (e.g. `djhtml` and `djlint` in "venv")
-- builtin `djhtml` and `djlint` (Installation commands are also provided)
+- `htmldjango.djlint.commandPath` and `htmldjango.djhtml.commandPath` settings
+- current python environment (e.g. `djlint` and `djhtml` in "venv")
+- builtin `djlint` and `djhtml` (Installation commands are also provided)
 
 ## Configuration options for coc-htmldjango
 
@@ -49,9 +49,7 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 - `htmldjango.completion.enable`: Enable snippets completion, default: `true`
 - `htmldjango.completion.exclude`: Exclude specific key in snippet completion, default: `["autoescape_paste", "comment_paste", "comment_selection", "for_paste", "forempty_paste", "if_paste", "ifelse_paste", "spaceless_paste", "verbatim_paste", "with_selection", "with_paste", "trans_paste", "blocktrans_paste", "blocktrans_with_paste", "translate_paste", "blocktranslate_paste", "blocktranslate_with_paste"]`
 - `htmldjango.builtin.pythonPath`: Python 3.x path (Absolute path) to be used for built-in install, default: `""`
-- `htmldjango.formatting.provider`: Provider for formatting. Possible options include 'djhtml', 'djlint', and 'none', default: `"djhtml"`
-- `htmldjango.djhtml.commandPath`: The custom path to the djhtml (Absolute path), default: `""`
-- `htmldjango.djhtml.tabWidth`: Set tabwidth (--tabwidth), default: `4`
+- `htmldjango.formatting.provider`: Provider for formatting. Possible options include 'djlint', 'djhtml' and 'none', default: `"djlint"`
 - `htmldjango.djlint.commandPath`: The custom path to the djlint (Absolute path), default: `""`
 - `htmldjango.djlint.enableLint`: Enable djLint lint (diagnostics), default: `false`
 - `htmldjango.djlint.lintOnOpen`: Lint file on opening, default: `true`
@@ -65,13 +63,15 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 - `htmldjango.djlint.preserveBlankLines`: Attempt to preserve blank lines (`--preserve-blank-lines`), default: `false`
 - `htmldjango.djlint.formatCss`: Also format contents of style tags (`--format-css`), default: `false`
 - `htmldjango.djlint.formatJs`: Also format contents of script tags (`--format-js`), default: `false`
+- `htmldjango.djhtml.commandPath`: The custom path to the djhtml (Absolute path), default: `""`
+- `htmldjango.djhtml.tabWidth`: Set tabwidth (--tabwidth), default: `4`
 
 ## Commands
 
 - `htmldjango.showOutput`
 - `htmldjango.builtin.installTools`
-- `htmldjango.djhtml.format`
 - `htmldjango.djlint.format`
+- `htmldjango.djhtml.format`
 
 ## Code Actions
 
@@ -83,16 +83,16 @@ nmap <silent> ga <Plug>(coc-codeaction-line)
 
 **Actions**:
 
-- If `htmldjango.formatting.provider` is `djhtml`
-  - `Add {# fmt:off #} for this line`
-  - `Add {# fmt:on #} for this line`
 - If `htmldjango.formatting.provider` is `djlint` or If `htmldjango.djlint.enableLint` is `true`
   - `Add <!-- djlint:off --> for this line`
   - `Add <!-- djlint:on --> for this line`
+- If `htmldjango.formatting.provider` is `djhtml`
+  - `Add {# fmt:off #} for this line`
+  - `Add {# fmt:on #} for this line`
 
-## Bult-in install (DjHTML, djLint)
+## Bult-in install (djLint, DjHTML)
 
-coc-htmldjango allows you to create an extension-only "venv" and install "djhtml" and "djlint".
+coc-htmldjango allows you to create an extension-only "venv" and install "djlint" and "djhtml".
 
 ```vim
 :CocCommand htmldjango.builtin.installTools
@@ -100,9 +100,9 @@ coc-htmldjango allows you to create an extension-only "venv" and install "djhtml
 
 ## Thanks
 
-- [vscode-django/vscode-django](https://github.com/vscode-django/vscode-django)
-- [rtts/djhtml](https://github.com/rtts/djhtml)
 - [Riverside-Healthcare/djlint](https://github.com/Riverside-Healthcare/djlint)
+- [rtts/djhtml](https://github.com/rtts/djhtml)
+- [vscode-django/vscode-django](https://github.com/vscode-django/vscode-django)
 
 ## License
 

@@ -45,22 +45,22 @@ class HtmlDjangoFormattingEditProvider implements DocumentFormattingEditProvider
   public getFormatFunc(formatter?: string): FormatFuncType {
     let formatterFunc: FormatFuncType;
 
-    formatterFunc = doDjhtmlFormat;
+    formatterFunc = doDjlintFormat;
 
     if (formatter) {
-      if (formatter === 'djhtml') {
-        formatterFunc = doDjhtmlFormat;
-      } else if (formatter === 'djlint') {
+      if (formatter === 'djlint') {
         formatterFunc = doDjlintFormat;
+      } else if (formatter === 'djhtml') {
+        formatterFunc = doDjhtmlFormat;
       }
     } else {
       const extensionConfig = workspace.getConfiguration('htmldjango');
-      const formattingProvider = extensionConfig.get<string>('formatting.provider', 'djhtml');
+      const formattingProvider = extensionConfig.get<string>('formatting.provider', 'djlint');
 
-      if (formattingProvider === 'djhtml') {
-        formatterFunc = doDjhtmlFormat;
-      } else if (formattingProvider === 'djlint') {
+      if (formattingProvider === 'djlint') {
         formatterFunc = doDjlintFormat;
+      } else if (formattingProvider === 'djhtml') {
+        formatterFunc = doDjhtmlFormat;
       }
     }
 
