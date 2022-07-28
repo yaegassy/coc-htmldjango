@@ -23,6 +23,8 @@ export async function doDjlintFormat(
   const profile = extensionConfig.get<string>('djlint.profile', 'django');
   const preserveLeadingSpace = extensionConfig.get<boolean>('djlint.preserveLeadingSpace', false);
   const preserveBlankLines = extensionConfig.get<boolean>('djlint.preserveBlankLines', false);
+  const formatCss = extensionConfig.get<boolean>('djlint.formatCss', false);
+  const formatJs = extensionConfig.get<boolean>('djlint.formatJs', false);
 
   const text = document.getText(range);
   const fileName = Uri.parse(document.uri).fsPath;
@@ -68,6 +70,12 @@ export async function doDjlintFormat(
   // MEMO: "--preserve-blank-lines" option has been available since v1.3.0
   if (toolVersion && semver.gte(toolVersion, '1.3.0')) {
     if (preserveBlankLines) args.push('--preserve-blank-lines');
+  }
+
+  // MEMO: "--format-css" and "--format-js" option has been available since v1.9.0
+  if (toolVersion && semver.gte(toolVersion, '1.9.0')) {
+    if (formatCss) args.push('--format-css');
+    if (formatJs) args.push('--format-js');
   }
 
   const tmpFile = tmp.fileSync();
