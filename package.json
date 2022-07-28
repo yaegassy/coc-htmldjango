@@ -123,23 +123,13 @@
         },
         "htmldjango.formatting.provider": {
           "type": "string",
-          "default": "djhtml",
-          "description": "Provider for formatting. Possible options include 'djhtml' and 'djlint'",
+          "default": "djlint",
+          "description": "Provider for formatting. Possible options include 'djlint', 'djhtml' and 'none'",
           "enum": [
-            "djhtml",
             "djlint",
+            "djhtml",
             "none"
           ]
-        },
-        "htmldjango.djhtml.commandPath": {
-          "type": "string",
-          "default": "",
-          "description": "The custom path to the djhtml (Absolute path)."
-        },
-        "htmldjango.djhtml.tabWidth": {
-          "type": "number",
-          "default": 4,
-          "description": "Set tabwidth (--tabwidth)"
         },
         "htmldjango.djlint.commandPath": {
           "type": "string",
@@ -214,6 +204,16 @@
           "type": "boolean",
           "default": false,
           "description": "Also format contents of <script> tags (--format-js)"
+        },
+        "htmldjango.djhtml.commandPath": {
+          "type": "string",
+          "default": "",
+          "description": "The custom path to the djhtml (Absolute path)."
+        },
+        "htmldjango.djhtml.tabWidth": {
+          "type": "number",
+          "default": 4,
+          "description": "Set tabwidth (--tabwidth)"
         }
       }
     },
@@ -227,12 +227,12 @@
         "title": "Install htmldjango related tools"
       },
       {
-        "command": "htmldjango.djhtml.format",
-        "title": "DjHTML format"
-      },
-      {
         "command": "htmldjango.djlint.format",
         "title": "djLint format"
+      },
+      {
+        "command": "htmldjango.djhtml.format",
+        "title": "DjHTML format"
       }
     ]
   }
