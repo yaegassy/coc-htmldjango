@@ -60,9 +60,6 @@ export async function doDjhtmlFormat(
       cps.stderr.on('data', (data: Buffer) => {
         outputChannel.appendLine(`\n==== STDERR ===\n`);
         outputChannel.appendLine(`${data}`);
-
-        // rollback
-        resolve(originalText);
       });
 
       cps.stdout.on('data', (data: Buffer) => {
