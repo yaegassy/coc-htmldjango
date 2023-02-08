@@ -16,7 +16,7 @@ function getPackageVersion(name: string) {
   const rootDir = path.resolve(path.dirname(__filename), '..');
   const filePath = path.join(rootDir, 'pyproject.toml');
   const fileStr = fs.readFileSync(filePath);
-  const data: PyprojectToml = toml.parse(fileStr);
+  const data: PyprojectToml = toml.parse(fileStr.toString());
   const version = data.tool.poetry.dependencies[name];
 
   return version;
