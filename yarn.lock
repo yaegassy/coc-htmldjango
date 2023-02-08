@@ -223,7 +223,7 @@
   resolved "https://registry.yarnpkg.com/@types/which/-/which-2.0.1.tgz#27ecd67f915b7c3d6ba552135bb1eecd66e63501"
   integrity sha512-Jjakcv8Roqtio6w1gr0D7y6twbhx6gGgFGF5BLwajPpnOIOxFkakFhCq+LmyyeAz7BX6ULrjBOxdKaCDy+4+dQ==
 
-"@typescript-eslint/eslint-plugin@^5.50.0":
+"@typescript-eslint/eslint-plugin@^5.51.0":
   version "5.51.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.51.0.tgz#da3f2819633061ced84bb82c53bba45a6fe9963a"
   integrity sha512-wcAwhEWm1RgNd7dxD/o+nnLW8oH+6RK1OGnmbmkj/GGoDPV1WWMVP0FXYQBivKHdwM1pwii3bt//RC62EriIUQ==
