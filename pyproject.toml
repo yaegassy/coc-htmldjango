@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "coc-htmldjango"
+version = "0.1.0"
+description = ""
+authors = ["yaegassy <yosstools@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+djlint = "1.19.3"
+djhtml = "2.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
