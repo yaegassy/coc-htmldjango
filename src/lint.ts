@@ -49,11 +49,19 @@ export class LintEngine {
     const opts = { cwd, shell: true };
 
     const extensionConfig = workspace.getConfiguration('htmldjango');
+    const includeRules = extensionConfig.get<string>('djlint.include', '');
     const ignoreRules = extensionConfig.get<string>('djlint.ignore', '');
     const profile = extensionConfig.get<string>('djlint.profile', 'django');
     const useGitIgnore = extensionConfig.get<boolean>('djlint.useGitIgnore', false);
     const preserveLeadingSpace = extensionConfig.get<boolean>('djlint.preserveLeadingSpace', false);
     const preserveBlankLines = extensionConfig.get<boolean>('djlint.preserveBlankLines', false);
+
+    // MEMO: "--include" option has been available since v1.20.0
+    if (this.toolVersion && semver.gte(this.toolVersion, '1.20.0')) {
+      if (includeRules) {
+        args.push('--include', includeRules);
+      }
+    }
 
     if (ignoreRules) {
       args.push('--ignore', ignoreRules);

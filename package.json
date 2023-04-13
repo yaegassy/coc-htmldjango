@@ -154,6 +154,11 @@
           "default": true,
           "description": "Lint file on save"
         },
+        "htmldjango.djlint.include": {
+          "type": "string",
+          "default": "",
+          "description": "Codes to include (--include)"
+        },
         "htmldjango.djlint.ignore": {
           "type": "string",
           "default": "",

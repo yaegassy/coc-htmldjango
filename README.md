@@ -55,6 +55,7 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 - `htmldjango.djlint.lintOnOpen`: Lint file on opening, default: `true`
 - `htmldjango.djlint.lintOnChange`: Lint file on change, default: `true`
 - `htmldjango.djlint.lintOnSave`: Lint file on save, default: `true`
+- `htmldjango.djlint.include`: Codes to include (`--include`), ex: "H014,H017", default: `""`
 - `htmldjango.djlint.ignore`: Codes to ignore (`--ignore`), ex: "W013,W014", default: `""`
 - `htmldjango.djlint.indent`: Indent spacing (`--indent`), default: `4`
 - `htmldjango.djlint.profile`: Enable defaults by template language. ops: html, django, jinja, nunjucks, handlebars, golang and angular, default: `["django"]`
