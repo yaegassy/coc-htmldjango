@@ -164,6 +164,11 @@
           "default": "",
           "description": "Codes to ignore (--ignore)"
         },
+        "htmldjango.djlint.ignoreCase": {
+          "type": "boolean",
+          "default": false,
+          "description": "Do not fix case on known html tags (--ignore-case)"
+        },
         "htmldjango.djlint.indent": {
           "type": "number",
           "default": 4,
