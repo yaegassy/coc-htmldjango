@@ -169,6 +169,11 @@
           "default": false,
           "description": "Do not fix case on known html tags (--ignore-case)"
         },
+        "htmldjango.djlint.ignoreBlocks": {
+          "type": "string",
+          "default": "",
+          "description": "Comma list of template blocks to not indent (--ignore-blocks)"
+        },
         "htmldjango.djlint.indent": {
           "type": "number",
           "default": 4,

@@ -26,6 +26,7 @@ export async function doDjlintFormat(
   const formatCss = extensionConfig.get<boolean>('djlint.formatCss', false);
   const formatJs = extensionConfig.get<boolean>('djlint.formatJs', false);
   const ignoreCase = extensionConfig.get<boolean>('djlint.ignoreCase', false);
+  const ignoreBlocks = extensionConfig.get<string>('djlint.ignoreBlocks', '');
 
   const text = document.getText(range);
   const fileName = Uri.parse(document.uri).fsPath;
@@ -82,6 +83,11 @@ export async function doDjlintFormat(
   // MEMO: "--ignore-case" option has been available since v1.23.0
   if (toolVersion && semver.gte(toolVersion, '1.23.0')) {
     if (ignoreCase) args.push('--ignore-case');
+  }
+
+  // MEMO: "--ignore-blocks" option has been available since v1.24.0
+  if (toolVersion && semver.gte(toolVersion, '1.24.0')) {
+    if (ignoreBlocks) args.push('--ignore-blocks', `'${ignoreBlocks}'`);
   }
 
   const tmpFile = tmp.fileSync();
