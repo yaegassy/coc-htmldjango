@@ -27,6 +27,7 @@ export async function doDjlintFormat(
   const formatJs = extensionConfig.get<boolean>('djlint.formatJs', false);
   const ignoreCase = extensionConfig.get<boolean>('djlint.ignoreCase', false);
   const ignoreBlocks = extensionConfig.get<string>('djlint.ignoreBlocks', '');
+  const addFormatterArgs = extensionConfig.get<string[]>('djlint.addFormatterArgs', []);
 
   const text = document.getText(range);
   const fileName = Uri.parse(document.uri).fsPath;
@@ -88,6 +89,10 @@ export async function doDjlintFormat(
   // MEMO: "--ignore-blocks" option has been available since v1.24.0
   if (toolVersion && semver.gte(toolVersion, '1.24.0')) {
     if (ignoreBlocks) args.push('--ignore-blocks', `'${ignoreBlocks}'`);
+  }
+
+  if (addFormatterArgs) {
+    args.push(addFormatterArgs.join(' '));
   }
 
   const tmpFile = tmp.fileSync();

@@ -218,6 +218,22 @@
           "default": false,
           "description": "Also format contents of <script> tags (--format-js)"
         },
+        "htmldjango.djlint.addLinterArgs": {
+          "type": "array",
+          "description": "Additional arguments passed to djlint linter",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "htmldjango.djlint.addFormatterArgs": {
+          "type": "array",
+          "description": "Additional arguments passed to djlint formatter",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
         "htmldjango.djhtml.commandPath": {
           "type": "string",
           "default": "",

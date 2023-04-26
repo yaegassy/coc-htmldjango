@@ -55,6 +55,7 @@ export class LintEngine {
     const useGitIgnore = extensionConfig.get<boolean>('djlint.useGitIgnore', false);
     const preserveLeadingSpace = extensionConfig.get<boolean>('djlint.preserveLeadingSpace', false);
     const preserveBlankLines = extensionConfig.get<boolean>('djlint.preserveBlankLines', false);
+    const addLinterArgs = extensionConfig.get<string[]>('djlint.addLinterArgs', []);
 
     // MEMO: "--include" option has been available since v1.20.0
     if (this.toolVersion && semver.gte(this.toolVersion, '1.20.0')) {
@@ -85,6 +86,10 @@ export class LintEngine {
     // MEMO: "--preserve-blank-lines" option has been available since v1.3.0
     if (this.toolVersion && semver.gte(this.toolVersion, '1.3.0')) {
       if (preserveBlankLines) args.push('--preserve-blank-lines');
+    }
+
+    if (addLinterArgs) {
+      args.push(addLinterArgs.join(' '));
     }
 
     args.push('-');

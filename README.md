@@ -66,6 +66,8 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 - `htmldjango.djlint.preserveBlankLines`: Attempt to preserve blank lines (`--preserve-blank-lines`), default: `false`
 - `htmldjango.djlint.formatCss`: Also format contents of style tags (`--format-css`), default: `false`
 - `htmldjango.djlint.formatJs`: Also format contents of script tags (`--format-js`), default: `false`
+- `htmldjango.djlint.addLinterArgs`: Additional arguments passed to djlint linter, example: `["--max-line-length", "250", "--max-attribute-length", "80"]`, default: `[]`
+- `htmldjango.djlint.addFormatterArgs`: Additional arguments passed to djlint formatter, example: `["--max-line-length", "250", "--max-attribute-length", "80"]`, default: `[]`
 - `htmldjango.djhtml.commandPath`: The custom path to the djhtml (Absolute path), default: `""`
 - `htmldjango.djhtml.tabWidth`: Set tabwidth (--tabwidth), default: `4`
 
