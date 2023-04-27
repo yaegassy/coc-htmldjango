@@ -15,6 +15,7 @@ django templates (htmldjango) extension for [coc.nvim](https://github.com/neocli
   - Completion of snippets data via `completionItemProvider`
 - Hover | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/1)
 - CodeAction | [DEMO](https://github.com/yaegassy/coc-htmldjango/pull/3)
+- Commands
 - Built-in installer (djLint, DjHTML)
 
 ## Install
@@ -73,10 +74,11 @@ Plug 'yaegassy/coc-htmldjango', {'do': 'yarn install --frozen-lockfile'}
 
 ## Commands
 
-- `htmldjango.showOutput`
-- `htmldjango.builtin.installTools`
-- `htmldjango.djlint.format`
-- `htmldjango.djhtml.format`
+- `htmldjango.showOutput`: Show htmldjango output channel
+- `htmldjango.builtin.installTools`: Install htmldjango related tools
+- `htmldjango.djlint.format`: Run djLint format
+- `htmldjango.djhtml.format`: Run DjHTML format
+- `htmldjango.showReferences`: Show  Variables Block (`{{ ... }}`) or TemplateTags Block (`{% ... %}`) location information for the current file
 
 ## Code Actions
 
