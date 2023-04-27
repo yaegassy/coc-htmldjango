@@ -36,6 +36,7 @@
     "semi": true
   },
   "devDependencies": {
+    "@types/mustache": "^4.2.2",
     "@types/node": "^18.16.1",
     "@types/rimraf": "^3.0.2",
     "@types/semver": "^7.3.10",
@@ -257,15 +258,20 @@
       },
       {
         "command": "htmldjango.djlint.format",
-        "title": "djLint format"
+        "title": "Run djLint format"
       },
       {
         "command": "htmldjango.djhtml.format",
-        "title": "DjHTML format"
+        "title": "Run DjHTML format"
+      },
+      {
+        "command": "htmldjango.showReferences",
+        "title": "Show  Variables Block (`{{ ... }}`) or TemplateTags Block (`{% ... %}`) location information for the current file"
       }
     ]
   },
   "dependencies": {
+    "mustache": "^4.2.0",
     "toml": "^3.0.0"
   }
 }

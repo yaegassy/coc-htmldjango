@@ -4,12 +4,18 @@ import {
   DocumentSelector,
   ExtensionContext,
   languages,
+  Location,
+  Position,
+  Range,
   TextEdit,
+  Uri,
   window,
   workspace,
 } from 'coc.nvim';
 
 import fs from 'fs';
+
+import mustache from 'mustache';
 
 import { HtmlDjangoCodeActionProvider } from './action';
 import { FiltersSnippetsCompletionProvider } from './completion/filtersSnippetsCompletion';
@@ -24,6 +30,13 @@ interface Selectors {
   rangeLanguageSelector: DocumentSelector;
   languageSelector: DocumentSelector;
 }
+
+type HtmlDjangoeferenceType = {
+  startLine: number;
+  startChar: number;
+  endLine: number;
+  endChar: number;
+};
 
 let formatterHandler: undefined | Disposable;
 let rangeFormatterHandler: undefined | Disposable;
@@ -54,7 +67,6 @@ export async function activate(context: ExtensionContext): Promise<void> {
   const isEnable = extensionConfig.get<boolean>('enable', true);
   if (!isEnable) return;
 
-  const { subscriptions } = context;
   const outputChannel = window.createOutputChannel('htmldjango');
 
   const extensionStoragePath = context.storagePath;
@@ -74,7 +86,77 @@ export async function activate(context: ExtensionContext): Promise<void> {
     })
   );
 
-  subscriptions.push(
+  context.subscriptions.push(
+    commands.registerCommand('htmldjango.showReferences', async () => {
+      const { document, position } = await workspace.getCurrentState();
+      if (document.languageId !== 'htmldjango') return;
+
+      function parse(template: string, openingAndClosingTags: mustache.OpeningAndClosingTags) {
+        try {
+          const parsed = mustache.parse(template, openingAndClosingTags);
+          return parsed.map((p) => {
+            return {
+              templateSpanType: p[0],
+              content: p[1],
+              startOffset: p[2],
+              endOffset: p[3],
+            };
+          });
+        } catch (e) {
+          // parse error
+          // ...noop
+        }
+      }
+
+      const parsedBlocks: {
+        templateSpanType: mustache.TemplateSpanType;
+        content: string;
+        startOffset: number;
+        endOffset: number;
+      }[] = [];
+
+      const text = document.getText();
+      const variablesBlock = parse(text, ['{{', '}}']);
+      if (variablesBlock) {
+        parsedBlocks.push(...variablesBlock);
+      }
+
+      const templateTagsBlock = parse(text, ['{%', '%}']);
+      if (templateTagsBlock) {
+        parsedBlocks.push(...templateTagsBlock);
+      }
+
+      const refs: HtmlDjangoeferenceType[] = [];
+
+      parsedBlocks
+        .filter((p) => p.templateSpanType === 'name')
+        .forEach((p) => {
+          const startPosition = document.positionAt(p.startOffset);
+          const endPosition = document.positionAt(p.endOffset);
+
+          refs.push({
+            startLine: startPosition.line,
+            startChar: startPosition.character,
+            endLine: endPosition.line,
+            endChar: endPosition.character,
+          });
+        });
+
+      commands.executeCommand(
+        'editor.action.showReferences',
+        Uri.parse(document.uri),
+        position,
+        refs.map((ref) =>
+          Location.create(
+            document.uri,
+            Range.create(Position.create(ref.startLine, ref.startChar), Position.create(ref.endLine, ref.endChar))
+          )
+        )
+      );
+    })
+  );
+
+  context.subscriptions.push(
     commands.registerCommand('htmldjango.builtin.installTools', async () => {
       await installWrapper(pythonCommand, context);
       workspace.nvim.command(`CocRestart`, true);
@@ -123,7 +205,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
     registerFormatter();
   }
 
-  subscriptions.push(
+  context.subscriptions.push(
     commands.registerCommand('htmldjango.djhtml.format', async () => {
       const doc = await workspace.document;
       const doFormat = editProvider.getFormatFunc('djhtml');
@@ -135,7 +217,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
     })
   );
 
-  subscriptions.push(
+  context.subscriptions.push(
     commands.registerCommand('htmldjango.djlint.format', async () => {
       const doc = await workspace.document;
       const doFormat = editProvider.getFormatFunc('djlint');
@@ -175,7 +257,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
           await engine.lint(e);
         },
         null,
-        subscriptions
+        context.subscriptions
       );
     }
     const onChange = extensionConfig.get<boolean>('djlint.lintOnChange');
@@ -187,7 +269,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
           await engine.lint(doc.textDocument);
         },
         null,
-        subscriptions
+        context.subscriptions
       );
     }
     const onSave = extensionConfig.get<boolean>('djlint.lintOnSave');
@@ -197,7 +279,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
           await engine.lint(e);
         },
         null,
-        subscriptions
+        context.subscriptions
       );
     }
   }
