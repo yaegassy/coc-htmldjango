@@ -59,14 +59,14 @@ dev = ["nox", "pre-commit"]
 
 [[package]]
 name = "djlint"
-version = "1.26.0"
+version = "1.27.0"
 description = "HTML Template Linter and Formatter"
 category = "main"
 optional = false
 python-versions = ">=3.8.0,<4.0.0"
 files = [
-    {file = "djlint-1.26.0-py3-none-any.whl", hash = "sha256:70433268642bb034452a6b5b1c127fbaedf8d1a11deb5f10d858668085c9671a"},
-    {file = "djlint-1.26.0.tar.gz", hash = "sha256:becdb7fd37950c65cbb01813ed12faee1feb5ec7bce8be6062411dde621f8ec7"},
+    {file = "djlint-1.27.0-py3-none-any.whl", hash = "sha256:14ac969c93e894dc541713fbcf02a72e70067d5e25b6ea4d1c3e6b24e99f4ba5"},
+    {file = "djlint-1.27.0.tar.gz", hash = "sha256:b3a698ac548dc75a46f60bf77b33d50ed9f3c0dc7b302d9222e7b1a6e87aa27d"},
 ]
 
 [package.dependencies]
@@ -329,4 +329,4 @@ telegram = ["requests"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "d722eca5bebbe107b1b07114194d40a04d2ca1fb92bf1a6695ed5e5512041c8f"
+content-hash = "f7f423792180f3d11092a4218eff3325f2f03ff85a62046e291e91d0d66a4b35"
