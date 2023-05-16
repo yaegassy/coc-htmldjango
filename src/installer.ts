@@ -23,7 +23,7 @@ export async function installTools(pythonCommand: string, context: ExtensionCont
   statusItem.show();
 
   const installCmd =
-    `${pythonCommand} -m venv ${pathVenv} && ` +
+    `"${pythonCommand}" -m venv ${pathVenv} && ` +
     `${pathVenvPython} -m pip install -U pip djhtml==${DJHTML_VERSION} djlint==${DJLINT_VERSION}`;
 
   rimraf.sync(pathVenv);
