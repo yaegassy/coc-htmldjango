@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@types/mustache": "^4.2.2",
-    "@types/node": "^18.16.14",
+    "@types/node": "^18.16.16",
     "@types/rimraf": "^3.0.2",
     "@types/semver": "^7.3.10",
     "@types/tmp": "^0.2.3",
