@@ -1,6 +1,6 @@
 {
   "name": "coc-htmldjango",
-  "version": "0.14.12",
+  "version": "0.14.13",
   "description": "django templates (htmldjango) extension for coc.nvim. Provides formatter, snippets completion and more...",
   "author": "yaegassy <yosstools@gmail.com>",
   "license": "MIT",
