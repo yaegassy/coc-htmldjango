@@ -7,7 +7,7 @@ authors = ["yaegassy <yosstools@gmail.com>"]
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"
 djlint = "1.36.4"
-djhtml = "3.0.7"
+djhtml = "3.0.10"
 
 
 [build-system]
